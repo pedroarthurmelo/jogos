@@ -29,21 +29,32 @@
     </header>
     <div class="row">
         <h2>Lançamentos</h2>
-        <div class="row-posters">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
+        <div class="row-container">
+            <button class="left-arrow">&#10094;</button>
+            <div class="row-posters">
+                <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
+                <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
+            </div>
+            <button class="right-arrow">&#10095;</button>
         </div>
     </div>
+    
     <div class="row">
         <h2>Popular</h2>
         <div class="row-posters">
@@ -105,6 +116,48 @@
                 nav.classList.remove('nav-black')
             }
         })
+        document.addEventListener("DOMContentLoaded", function() {
+        const rows = document.querySelectorAll(".row-container");
+
+        rows.forEach(row => {
+            const leftArrow = row.querySelector(".left-arrow");
+            const rightArrow = row.querySelector(".right-arrow");
+            const rowPosters = row.querySelector(".row-posters");
+
+            let scrollAmount = 0;
+            let slideTimer;
+
+            function smoothScroll(amount) {
+                let start = rowPosters.scrollLeft;
+                let end = start + amount;
+                let duration = 500; // Tempo da animação em ms
+                let startTime = null;
+
+                function animationStep(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    let progress = timestamp - startTime;
+                    let ease = progress / duration;
+                    rowPosters.scrollLeft = start + (end - start) * ease;
+
+                    if (progress < duration) {
+                        requestAnimationFrame(animationStep);
+                    } else {
+                        rowPosters.scrollLeft = end;
+                    }
+                }
+                requestAnimationFrame(animationStep);
+            }
+
+            leftArrow.addEventListener("click", function() {
+                smoothScroll(-300); // Movimenta para a esquerda
+            });
+
+            rightArrow.addEventListener("click", function() {
+                smoothScroll(300); // Movimenta para a direita
+            });
+
+        });
+    });
     </script>
 </body>
 </html>
