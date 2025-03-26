@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Elden Ring</title>
+        <link rel="stylesheet" href="../css/css_jogos.css">
+    </head>
+<body>
+    <!--parte de cima do header-->
+    <div class="nav" id="nav">
+        <img src="../imagens/logo_steam.svg" class="nav-logo" alt="">
+        <img src="../imagens/avatar.webp" class="nav-avatar" alt="">
+    </div>
+    
+    <div class="container">
+        <div class="content">
+            <h1>CRÍTICA | ELDEN RING</h1>
+            <img src="../imagens/elden_ring.webp" alt="Imagem do Elden Ring" width="250px" >
+            <p>Texto da crítica...</p>
+        </div>
+    </div>
+
+    <script>
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY >= 100) {
+                nav.classList.add('nav-black')
+            }
+            else{
+                nav.classList.remove('nav-black')
+            }
+        })
+    </script>
+</body>
+</html>

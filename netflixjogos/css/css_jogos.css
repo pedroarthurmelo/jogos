@@ -1,0 +1,50 @@
+/*mudou a fonte e a cor do background*/
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: #111;
+    margin: 0;
+}
+
+.nav-logo{
+    width: 80px;
+    object-fit: contain;
+}
+
+.nav-avatar{
+    width: 30px;
+    object-fit: contain;
+}
+
+.nav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    z-index: 1;
+    transition: all 0.5 ease-in;
+}
+
+.nav-black {
+    background: #111;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.content {
+    border: solid; color: ghostwhite;
+    background-color: rgb(3, 3, 3);
+    width: 70%;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 80px;
+}
