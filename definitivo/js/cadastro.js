@@ -4,8 +4,11 @@ function registrar() {
     let telefone = document.getElementById("telefone").value;
     let senha = document.getElementById("senha").value;
     let confirmarSenha = document.getElementById("confirmarSenha").value;
+
+    //biblioteca do CRYPTOJS
     let hash = CryptoJS.SHA256(senha).toString();
 
+    //EXPRESSÕES REGULARES
     let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     let regexCPF = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
     let regexTelefone = /^\([1-9]{2}\)\s?9?\s?[0-9]{4}-[0-9]{4}$/;
@@ -31,7 +34,7 @@ function registrar() {
 
     // Validando senha
     if (regexSenha.test(senha) == false) {
-        window.alert("A senha precisa ter mais que 8 dígitos, entre eles, 1 número , 1 letra maiúscula e 1 símbolo.");
+        window.alert("A senha precisa ter mais que 8 dígitos, entre eles, 1 número ,1 letra maiúscula e 1 símbolo.");
         return;
     }
 
@@ -44,6 +47,9 @@ function registrar() {
     // Se passou em todas as validações
     window.alert("Cadastro Realizado com Sucesso");
     console.log("Hash Gerado", hash);
+
+    //transferido para a página de login se estiver tudo OK
+    window.location.href = "../html/login.html"
 }
 
 
