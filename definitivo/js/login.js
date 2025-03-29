@@ -1,9 +1,9 @@
 function login() {
-    let username = document.getElementById("username").value; // Supondo que o "username" seja o email
+    let usuario = document.getElementById("username").value; // Captura o nome de usuário
     let senha = document.getElementById("senha").value;
 
     // Validações de entrada
-    if (!username || !senha) {
+    if (!usuario || !senha) {
         window.alert("Por favor, preencha todos os campos.");
         return;
     }
@@ -14,7 +14,7 @@ function login() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username: username})
+        body: JSON.stringify({ username: usuario }) // Envia o nome de usuário para o servidor
     })
     .then(response => response.json())
     .then(data => {
@@ -24,14 +24,14 @@ function login() {
         }
 
         // Verificando se a senha está correta
-        let usuario = data.usuario;
-        if (CryptoJS.SHA256(senha).toString() !== usuario.senha) {
+        let usuarioData = data.usuario;
+        if (CryptoJS.SHA256(senha).toString() !== usuarioData.senha) {
             window.alert("Senha incorreta.");
             return;
         }
 
         // Verificando se o e-mail está confirmado
-        if (!usuario.email_confirmado) {
+        if (!usuarioData.email_confirmado) {
             window.alert("Você precisa confirmar seu e-mail antes de fazer login.");
             return;
         }

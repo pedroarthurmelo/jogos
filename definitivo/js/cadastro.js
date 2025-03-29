@@ -10,7 +10,7 @@ function registrar() {
     let hash = CryptoJS.SHA256(senha).toString();
 
     // EXPRESSÕES REGULARES
-    let regexUsuario = /[^\d{1}$]/
+    let regexUsuario = /^[a-zA-Z0-9]+(?:[a-zA-Z0-9]*[-._]?[a-zA-Z0-9]+)*$/
     let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let regexCPF = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
     let regexTelefone = /^\([1-9]{2}\)\s?9?\s?[0-9]{4}-[0-9]{4}$/;
@@ -88,5 +88,6 @@ function registrar() {
         console.error('Erro:', error);
         window.alert('Houve um erro ao processar seu cadastro. Tente novamente.');
     });
-    
+
+    console.log('Enviando nome de usuário:', usuario);
 }

@@ -60,6 +60,7 @@ try {
 
 // Recebe os dados do usuário via POST
 $data = json_decode(file_get_contents('php://input'), true);
+$usuario = $data['usuario'];
 $email = $data['email'];
 
 // Caminho para o arquivo JSON onde os dados dos usuários serão armazenados
@@ -93,6 +94,7 @@ $usuarios[$email] = [
 file_put_contents($file, json_encode($usuarios));
 
 echo json_encode(['status' => 'success', 'message' => 'Cadastro realizado com sucesso!']);
+
 
 
 ?>
