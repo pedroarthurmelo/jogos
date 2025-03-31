@@ -1,5 +1,6 @@
 function registrar() {
     let usuario = document.getElementById("username").value;
+    let nome_completo = document.getElementById("nome_completo").value;
     let email = document.getElementById("email").value;
     let cpf = document.getElementById("cpf").value;
     let telefone = document.getElementById("telefone").value;
@@ -11,6 +12,7 @@ function registrar() {
 
     // EXPRESSÕES REGULARES
     let regexUsuario = /^[a-zA-Z0-9]+(?:[a-zA-Z0-9]*[-._]?[a-zA-Z0-9]+)*$/
+    // let regexNomeCompleto = /[]/
     let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let regexCPF = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
     let regexTelefone = /^\([1-9]{2}\)\s?9?\s?[0-9]{4}-[0-9]{4}$/;
@@ -20,6 +22,11 @@ function registrar() {
         window.alert("Precisa de pelo menos 1 digito o usuário");
         return;
     }
+
+    // if (regexNomeCompleto.test(nome_completo) == false){
+    //     window.alert("Precisa de pelo menos 1 LETRA");
+    //     return;
+    // }
 
     // Validando email
     if (regexEmail.test(email) == false) {
@@ -50,5 +57,16 @@ function registrar() {
         window.alert("As senhas não são iguais.");
         return;
     }
+
+    var form = document.getElementById('formulario');
+    
+    var dados = new FormData(form);
+    
+    
+    fetch("../php/insere-cadastro.php", {
+            method: "POST",
+            body: dados
+        });
+    
 
 }
