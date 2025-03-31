@@ -7,15 +7,6 @@ require '../PHPMAILER-master/src/Exception.php';
 require '../PHPMAILER-master/src/PHPMailer.php';
 require '../PHPMAILER-master/src/SMTP.php';
 
-// Recebe os dados da requisição
-$data = json_decode(file_get_contents('php://input'), true);
-$email = $data['email'];
-
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo json_encode(['status' => 'error', 'message' => 'Email inválido']);
-    exit;
-}
-
 $mail = new PHPMailer(true);
 
 try {
@@ -32,11 +23,11 @@ try {
     $mail->setFrom('pedroarthurmeloestudos@gmail.com', 'Nome do Nosso Site');
 
     // Destinatário
-    $mail->addAddress($email); // E-mail do usuário
+    $mail->addAddress('zavpowiski@gmail.com', ''); // E-mail do usuário
 
     // Assunto e corpo do e-mail
     $subject = "Verifique seu E-mail";
-    $verificationLink = "http://localhost/jogos/definitivo/php/confirmar_email.php?email=" . urlencode($email);        // Link de verificação
+    $verificationLink = "http://localhost/jogos/definitivo/php/confirmar_email.php?email=" . urlencode('zavpowiski@gmail.com');        // Link de verificação
 
     // Criando o botão HTML para o e-mail
     $htmlContent = "
@@ -58,42 +49,6 @@ try {
     echo json_encode(['status' => 'error', 'message' => $mail->ErrorInfo]);
 }
 
-// Recebe os dados do usuário via POST
-$data = json_decode(file_get_contents('php://input'), true);
-$usuario = $data['usuario'];
-$email = $data['email'];
-
-// Caminho para o arquivo JSON onde os dados dos usuários serão armazenados
-$file = 'usuarios.json';
-
-// Verificando se o arquivo existe, caso contrário, criamos um arquivo vazio
-if (!file_exists($file)) {
-    file_put_contents($file, json_encode([])); // Cria o arquivo com um array vazio
-}
-
-// Lê os dados existentes dos usuários
-$usuarios = json_decode(file_get_contents($file), true);
-
-// Verifica se o usuário já está cadastrado
-if (isset($usuarios[$email])) {
-    echo json_encode(['status' => 'error', 'message' => 'Usuário já cadastrado!']);
-    exit;
-}
-
-// Dados do novo usuário
-$usuarios[$email] = [
-    'username' => $usuario,
-    'email' => $email,
-    'cpf' => $data['cpf'],
-    'telefone' => $data['telefone'],
-    'senha' => $data['senha'], // Aqui seria o hash da senha
-    'email_confirmado' => false
-];
-
-// Atualiza o arquivo JSON com os dados do novo usuário
-file_put_contents($file, json_encode($usuarios));
-
-echo json_encode(['status' => 'success', 'message' => 'Cadastro realizado com sucesso!']);
 
 
 

@@ -29,13 +29,13 @@ function registrar() {
 
     // Validando CPF
     if (regexCPF.test(cpf) == false) {
-        window.alert("CPF PRECISA ESTAR NESSE FORMATO (xxx.xxx.xxx-xx)");
+        window.alert("CPF apenas nesse formato -> xxx.xxx.xxx-xx");
         return;
     }
 
     // Validando telefone
     if (regexTelefone.test(telefone) == false) {
-        window.alert("Telefone precisa ser nesse formato (xx) xxxxx-xxxx");
+        window.alert("Telefone apenas nesse formato -> (xx) xxxxx-xxxx");
         return;
     }
 
@@ -51,43 +51,4 @@ function registrar() {
         return;
     }
 
-    // Dados para enviar ao servidor
-    let dados = {
-        usuario: usuario,
-        email: email,
-        cpf: cpf,
-        telefone: telefone,
-        senha: hash,
-        email_confirmado: false  // Aqui você já envia o hash da senha
-    };
-
-    // Fazendo a requisição fetch para enviar os dados para o servidor
-    fetch('../php/validacao-email.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dados)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro na resposta do servidor');
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Verifica se o cadastro foi realizado com sucesso
-        if (data.status === 'success') {
-            window.alert("Cadastro Realizado com Sucesso. Um e-mail de verificação foi enviado.");
-            window.location.href = "../html/login.html";
-        } else {
-            window.alert("Erro no cadastro: " + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        window.alert('Houve um erro ao processar seu cadastro. Tente novamente.');
-    });
-
-    console.log('Enviando nome de usuário:', usuario);
 }
