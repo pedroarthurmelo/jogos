@@ -1,65 +1,73 @@
-function validarCampos() {
-    let nome = document.getElementById("nome-completo").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let cpf = document.getElementById("cpf").value.trim();
-    let telefone = document.getElementById("telefone").value.trim();
-    let senha = document.getElementById("password").value;
-    let confirmSenha = document.getElementById("confirmPassword").value;
-
-    let regexEmail = //ver na sala
-    let regexCPF = //ver na sala
-    let regexTelefone = //ver na sala
-    let regexSenha = //ver na sala
-
-    if (nome.length < 3) {
-        alert("Nome deve ter pelo menos 3 caracteres.");
-        return false;
-    }
-    if (!regexEmail.test(email)) {
-        alert("E-mail inválido.");
-        return false;
-    }
-    if (!regexCPF.test(cpf)) {
-        alert("CPF inválido. Use o formato xxx.xxx.xxx-xx");
-        return false;
-    }
-    if (!regexTelefone.test(telefone)) {
-        alert("Telefone inválido. Use o formato (xx) xxxxx-xxxx");
-        return false;
-    }
-    if (!regexSenha.test(senha)) {
-        alert("A senha deve ter pelo menos 8 caracteres, uma letra e um número.");
-        return false;
-    }
-    if (senha !== confirmSenha) {
-        alert("As senhas não coincidem.");
-        return false;
-    }
-    return true;
-}
-
 function registrar() {
-    if (!validarCampos()) {
+    let usuario = document.getElementById("username").value;
+    let nome_completo = document.getElementById("nome_completo").value;
+    let email = document.getElementById("email").value;
+    let cpf = document.getElementById("cpf").value;
+    let telefone = document.getElementById("telefone").value;
+    let senha = document.getElementById("senha").value;
+    let confirmarSenha = document.getElementById("confirmarSenha").value;
+
+    // Biblioteca do CRYPTOJS
+    let hashSenha = CryptoJS.SHA256(senha).toString();
+    let hashConfirmarSenha = CryptoJS.SHA256(confirmarSenha).toString();
+
+    // EXPRESSÕES REGULARES
+
+    let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let regexCPF = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+    let regexTelefone = /^\([1-9]{2}\)\s?9?\s?[0-9]{4}-[0-9]{4}$/;
+    let regexSenha = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!.])[0-9a-zA-Z$*&@#!.]{8,}$/;
+
+    if (usuario == null){
+        window.alert("Não pode estar vazio!");
+    }
+
+    if (nome_completo == null){
+        window.alert("Não pode estar vazio!");
+    }
+
+    // Validando email
+    if (regexEmail.test(email) == false) {
+        window.alert("Email precisa ser válido (EX: teste@dominio.com)");
         return;
     }
-    
-    let senha = document.getElementById("password").value;
-    let hash = CryptoJS.SHA256(senha).toString();
-    
-    var form = document.getElementById("formulario");
-    var dados = newFormData(form);
-    dados.set("password", hash);
 
-    fetch("../php/insere-cadastro.php", {
-        method: "POST",
-        body: dados
-    })
-    .then(response => response.text())
-    .then(data => {
-        alert("Cadastro realizado com sucesso!");
-        window.location.href = "../html/login.html";
-    })
-    .catch(error => {
-        console.error("Erro ao cadastrar:", error);
-    });
+    // Validando CPF
+    if (regexCPF.test(cpf) == false) {
+        window.alert("CPF apenas nesse formato -> xxx.xxx.xxx-xx");
+        return;
+    }
+
+    // Validando telefone
+    if (regexTelefone.test(telefone) == false) {
+        window.alert("Telefone apenas nesse formato -> (xx) xxxxx-xxxx");
+        return;
+    }
+
+    // Validando senha
+    if (regexSenha.test(senha) == false) {
+        window.alert("A senha precisa ter mais que 8 dígitos, entre eles, 1 número , 1 letra maiúscula e 1 símbolo.");
+        return;
+    }
+
+    // Verificando se as senhas são iguais
+    if (hashSenha !== hashConfirmarSenha) {
+        window.alert("As senhas não são iguais.");
+        return;
+    }
+
+    var form = document.getElementById('formulario');
+    
+    var dados = new FormData(form);
+
+    dados.set("senha", hashSenha);
+    dados.set("confirmarSenha", hashConfirmarSenha);
+    
+    
+    fetch("../php/envio_email.php", {
+            method: "POST",
+            body: dados
+        });
+    
+
 }
