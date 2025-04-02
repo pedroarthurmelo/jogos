@@ -1,0 +1,61 @@
+body {
+    background-color: #000;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+}
+.cabeçalho{
+    width: 100%;
+    height: 50px;
+    background-color: #12b412;
+    position: fixed;
+    top: 0;
+}
+.formulario{
+    background: rgba(0, 255, 0, 0.1);
+    padding: 20px;
+    border: 2px solid #00ff00;
+    box-shadow: 0px 0px 10px #00ff00;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 50px; 
+}
+
+input {
+    margin: 5px;
+    padding: 10px;
+    width: 250px;
+    border-radius: 5px;
+    background: black;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    font-size: 16px;
+}
+
+button {
+    background-color: #12b412;
+    color: white;
+    border: none;
+    width: 250px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.link-cadastro {
+    color: #00ff00;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.link-cadastro:hover {
+    text-decoration: underline;
+}
+
+
+

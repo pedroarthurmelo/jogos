@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Cadastro</title>
+    <link rel="stylesheet" href="../css/cadastro.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <div class="cabeçalho"></div>
+
+    <form class="formulario" id="formulario">
+        <h1>CADASTRO</h1>
+        <input type="text"  name="username"  id="username" placeholder="Usuário"> <br>
+        <input type="text" name="nome_completo" id="nome_completo" placeholder="Nome Completo"> <br>
+        <input type="email" name="email" id="email" placeholder="E-mail"> <br>
+        <input type="text" name="cpf" id="cpf" placeholder="CPF (xxx.xxx.xxx-xx)"> <br>
+        <input type="text" name="telefone" id="telefone" placeholder="Telefone (xx) xxxxx-xxxx"> <br>
+        <input type="password" name="senha" id="senha" placeholder="Senha"> <br>
+        <input type="password" name="confirmarSenha" id="confirmarSenha" placeholder="Confirme sua Senha"> <br>
+        <button type="button" onclick="registrar()">Cadastrar</button>
+        <br><br>
+        <a href="../html/login.html" class="link-cadastro">Já possui uma conta? Faça o login</a>
+    </form>
+
+    <script src="../js/cadastro.js"></script>
+</body>
+</html>
