@@ -18,6 +18,8 @@ $telefone = $_POST["telefone"];
 $senha = $_POST["senha"];
 $confirmarSenha = $_POST["confirmarSenha"];
 
+
+
 $token_ativacao = bin2hex(random_bytes(50));
 
 mysqli_query($con, "INSERT INTO usuarios (username, nome_completo, email, cpf, telefone, senha, confirmar_senha, token_ativacao, status) VALUES ('$username', '$nome_completo', '$email', '$cpf', '$telefone','$senha', '$confirmarSenha', '$token_ativacao', '$status' ) ");

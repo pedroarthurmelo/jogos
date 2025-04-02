@@ -1,4 +1,4 @@
-function registrar() {
+function cadastrar() {
     let usuario = document.getElementById("username").value;
     let nome_completo = document.getElementById("nome_completo").value;
     let email = document.getElementById("email").value;
@@ -50,7 +50,7 @@ function registrar() {
     }
 
     // Verificando se as senhas são iguais
-    if (hashSenha !== hashConfirmarSenhaconfirmarSenha) {
+    if (hashSenha !== hashConfirmarSenha) {
         window.alert("As senhas não são iguais.");
         return;
     }
