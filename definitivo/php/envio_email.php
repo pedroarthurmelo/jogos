@@ -10,7 +10,6 @@ require '../PHPMAILER-master/src/PHPMailer.php';
 require '../PHPMAILER-master/src/SMTP.php';
 
 
-
 $username = $_POST["username"];
 $nome_completo = $_POST["nome_completo"];
 $email = $_POST["email"];
@@ -22,7 +21,6 @@ $confirmarSenha = $_POST["confirmarSenha"];
 $token_ativacao = bin2hex(random_bytes(50));
 
 mysqli_query($con, "INSERT INTO usuarios (username, nome_completo, email, cpf, telefone, senha, confirmar_senha, token_ativacao, status) VALUES ('$username', '$nome_completo', '$email', '$cpf', '$telefone','$senha', '$confirmarSenha', '$token_ativacao', '$status' ) ");
-
 
 
 $mail = new PHPMailer(true);

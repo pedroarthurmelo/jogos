@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS criticajogos;
 CREATE DATABASE criticajogos;
 USE criticajogos;
 
+
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -13,4 +14,5 @@ CREATE TABLE usuarios (
     confirmar_senha VARCHAR(255) NOT NULL,
     token_ativacao VARCHAR(100),
     status ENUM('pendente', 'ativo') DEFAULT 'pendente'
+
 );

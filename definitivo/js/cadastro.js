@@ -12,24 +12,23 @@ function registrar() {
     let hashConfirmarSenha = CryptoJS.SHA256(confirmarSenha).toString();
 
     // EXPRESSÕES REGULARES
-
     let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let regexCPF = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
     let regexTelefone = /^\([1-9]{2}\)\s?9?\s?[0-9]{4}-[0-9]{4}$/;
     let regexSenha = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!.])[0-9a-zA-Z$*&@#!.]{8,}$/;
 
     if (usuario == null){
-        window.alert("Não pode estar vazio!");
+            window.alert("Não pode estar vazio!");
     }
 
     if (nome_completo == null){
-        window.alert("Não pode estar vazio!");
+            window.alert("Não pode estar vazio!");
     }
 
-    // Validando email
+        // Validando email
     if (regexEmail.test(email) == false) {
-        window.alert("Email precisa ser válido (EX: teste@dominio.com)");
-        return;
+            window.alert("Email precisa ser válido (EX: teste@dominio.com)");
+            return;
     }
 
     // Validando CPF
@@ -51,7 +50,7 @@ function registrar() {
     }
 
     // Verificando se as senhas são iguais
-    if (hashSenha !== hashConfirmarSenha) {
+    if (hashSenha !== hashConfirmarSenhaconfirmarSenha) {
         window.alert("As senhas não são iguais.");
         return;
     }
@@ -59,6 +58,7 @@ function registrar() {
     var form = document.getElementById('formulario');
     
     var dados = new FormData(form);
+
 
     dados.set("senha", hashSenha);
     dados.set("confirmarSenha", hashConfirmarSenha);
