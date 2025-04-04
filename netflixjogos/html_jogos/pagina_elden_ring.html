@@ -1,37 +1,77 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE-edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Elden Ring</title>
-        <link rel="stylesheet" href="../css/css_jogos.css">
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Elden Ring</title>
+    <link rel="stylesheet" href="../css/css_jogos.css">
+</head>
 <body>
     <!--parte de cima do header-->
     <div class="nav" id="nav">
         <img src="../imagens/logo_steam.svg" class="nav-logo" alt="">
         <img src="../imagens/avatar.webp" class="nav-avatar" alt="">
     </div>
-    
-    <div class="container">
-        <div class="content">
-            <h1>CRÍTICA | ELDEN RING</h1>
-            <img src="../imagens/elden_ring.webp" alt="Imagem do Elden Ring" width="250px" >
-            <p>Texto da crítica...</p>
-        </div>
-    </div>
 
-    <script>
-        const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY >= 100) {
-                nav.classList.add('nav-black')
-            }
-            else{
-                nav.classList.remove('nav-black')
-            }
-        })
-    </script>
+    <div class="caixa">
+        <div class="caixa-interna">
+            <h1>CRÍTICA | ELDEN RING</h1><br>
+            <div class="sinopse">
+                <img src="../imagens/elden_ring.webp" alt="Imagem do Elden Ring" width="250px" >
+                <div class="texto-sinopse">
+                    <h2>SINOPSE:</h2><br/>
+                    <p1>ELDEN RING, desenvolvido pela FromSoftware, Inc. e pela BANDAI NAMCO Entertainment Inc., é uma aventura de RPG de ação e fantasia ambientada em
+                         um mundo criado por 
+                        Hidetaka Miyazak e George R. R. Martin. O perigo e a descoberta estão à espreita em cada canto do maior jogo da FromSoftware até hoje.</p1><br>
+                    <br>
+                    
+                    <div class="alinhar">
+                        <div class="emendo">
+                            <h3>Criadora:</h3><br>
+                            <p2>From Software</p2><br><br>
+
+                            <h3>Generos:</h3><br>
+                            <p4>Souls like/RPG de ação/Mundo Aberto</p4>
+                        </div>
+                        <div class="emendo">
+                            <h3>Plataformas:</h3><br>
+                            <p3>PC/PS4/XBOX</p3><br><br>
+
+                            <h3>Avaliação:</h3><br>
+                            <p4>(Estrela de Avaliação)</p4>
+                        </div>
+                        <div class="emendo">
+                            <h3>Data de Lançamento:</h3><br>
+                            <p3>25 de fevereiro de 2022</p3><br><br>
+
+                            <button>(coração, favoritar)</button><br><br>
+                            <a href="../html_review/review_elden_ring.html"><button class="botao">Review</button></a><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <h2>Requisitos do Sistema:</h2><br>
+            <div class="alinhar">
+                <div class="requisitos">
+                    <h3>Mínimos</h3><br>
+                    <h4>SO:</h4><p1> Windows 10</p1><br><br>
+                    <h4>Processador:</h4><p1>INTEL CORE I5-8400 or AMD RYZEN 3 3300X</p1><br><br>
+                    <h4>Memória:</h4><p1> 12 GB de RAM</p1><br><br>
+                    <h4>Placa de vídeo:</h4><p1>NVIDIA GEFORCE GTX 1060 3 GB or AMD RADEON RX 580 4 GB</p1><br><br>
+                    <h4>Armazenamento:</h4><p1>60 GB de espaço disponível</p1><br><br>
+                </div>
+                <div class="requisitos">
+                    <h3>Recomendados</h3><br>
+                    <h4>SO:</h4><p1> Windows 10</p1><br><br>
+                    <h4>Processador:</h4><p1>INTEL CORE I7-8700K or AMD RYZEN 5 3600X</p1><br><br>
+                    <h4>Memória:</h4><p1>16 GB de RAM</p1><br><br>
+                    <h4>Placa de vídeo:</h4><p1>NVIDIA GEFORCE GTX 1070 8 GB or AMD RADEON RX VEGA 56 8 GB</p1><br><br>
+                    <h4>Armazenamento:</h4><p1>60 GB de espaço disponível</p1><br><br>
+                </div>
+            </div>
+        </div>
+    </div>    
 </body>
 </html>
