@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Senha</title>
+    <link rel="stylesheet" href="../css/nova_senha.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <form id="formNovaSenha">
+        <h1>Nova Senha</h1>
+        <input type="password" id="senha" placeholder="Nova senha" required><br>
+        <input type="password" id="confirmarSenha" placeholder="Confirmar nova senha" required><br>
+        <button type="button" onclick="atualizarSenha()">Atualizar Senha</button>
+    </form>
+
+    <script src="../js/nova_senha.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<?php
+session_start();
+require_once __DIR__ . '/../2fa/vendor/autoload.php';
+include '../php/conexao.php';
+
+use Sonata\GoogleAuthenticator\GoogleAuthenticator;
+
+$user_id = $_SESSION['user_id'] ?? null;
+$secret = $_SESSION['google_2fa_secret'] ?? null;
+
+if (!$user_id || !$secret) {
+    header("Location: login.html");
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $codigo = $_POST['codigo'];
+
+    $g = new GoogleAuthenticator();
+    
+    // Aqui garantimos que apenas o código atual é aceito (sem reuso)
+    if ($g->checkCode($secret, $codigo, 0)) {
+        $_SESSION['2fa_verificado'] = true;
+
+        // Marca 2FA como confirmado no banco
+        $stmt = $con->prepare("UPDATE usuarios SET 2fa_confirmado = 1 WHERE id = ?");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+
+        header("Location: painel.php");
+        exit;
+    } else {
+        $erro = "Código inválido ou expirado. Tente novamente.";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Verificação 2FA</title>
+</head>
+<body>
+    <h1>Digite o código do Google Authenticator</h1>
+    <form method="POST">
+        <input type="text" name="codigo" required maxlength="6" pattern="\d{6}" placeholder="123456" />
+        <button type="submit">Verificar</button>
+    </form>
+    <?php if (isset($erro)) echo "<p style='color:red;'>$erro</p>"; ?>
+</body>
+</html>

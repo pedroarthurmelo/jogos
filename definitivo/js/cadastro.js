@@ -39,18 +39,18 @@ function registrar() {
 
     // Validando telefone
     if (regexTelefone.test(telefone) == false) {
-        window.alert("Telefone apenas nesse formato -> (xx) xxxxx-xxxx");
+        window.alert("Telefone apenas nesse formato -> (xx) 9xxxx-xxxx ou (xx) 9 xxxx-xxxx");
         return;
     }
 
     // Validando senha
     if (regexSenha.test(senha) == false) {
-        window.alert("A senha precisa ter mais que 8 dígitos, entre eles, 1 número , 1 letra maiúscula e 1 símbolo.");
+        window.alert("A senha precisa ter no mínimo 8 caracteres, entre eles, 1 número ,1 letra maiúscula e 1 símbolo.");
         return;
     }
 
     // Verificando se as senhas são iguais
-    if (hashSenha !== hashConfirmarSenhaconfirmarSenha) {
+    if (hashSenha !== hashConfirmarSenha) {
         window.alert("As senhas não são iguais.");
         return;
     }
@@ -65,9 +65,21 @@ function registrar() {
     
     
     fetch("../php/envio_email.php", {
-            method: "POST",
-            body: dados
-        });
+        method: "POST",
+        body: dados
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert("E-mail de verificação enviado! Verifique sua caixa de entrada.");
+            window.location.href = "../html/login.html";
+        } else {
+            alert("Erro ao enviar e-mail: " + data.message);
+        }
+    })
+    .catch(error => {
+        alert("Erro na requisição: " + error);
+    });
     
 
 }

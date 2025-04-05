@@ -5,21 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Login</title>
     <link rel="stylesheet" href="../css/login.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
-    <div class="cabeçalho">
+    <div class="cabeçalho"></div>
 
-    </div>
     <form class="formulario" id="formulario">
         <h1>LOGIN</h1>
-        <input type="text" name="username" id="username" placeholder="Usuário"> <br>
-        <input type="password" name="senha" id="senha" placeholder="Senha"> <br>
+        <input type="email" name="email" id="email" placeholder="Digite seu E-mail"> <br>
+        <input type="password" name="senha" id="senha" placeholder="Digite sua senha"> <br>
 
         <button type="button" onclick="login()">Entrar</button>
         <br><br>
-        <a href="cadastro.html" class="link-cadastro">Esqueceu a senha? Clique aqui</a><br>
+        <a href="recuperar_senha.html" class="link-cadastro">Esqueceu a senha? Clique aqui</a><br>
         <a href="cadastro.html" class="link-cadastro">Não tem uma conta? Cadastre-se</a>
-        
     </form>
     
     <script src="../js/login.js"></script>
