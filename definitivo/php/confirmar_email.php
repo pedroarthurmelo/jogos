@@ -33,8 +33,14 @@ if (isset($_GET['email'])) {
     <link rel="stylesheet" href="../css/confirmar_email.css">
 </head>
 <body>
+    <div class="cabeçalho">
+        <a href="../html/bem_vindo.html">
+            <img src="../imagens/logo_steam.svg" alt="Logo GameWorld" class="logo" />
+        </a>
+    </div>
     <div class="container">
         <h1><?php echo $mensagem; ?></h1>
+        <br>
         <a href="../html/login.html" class="btn">Ir para Login</a>
     </div>
 </body>

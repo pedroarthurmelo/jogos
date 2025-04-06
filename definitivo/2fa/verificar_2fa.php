@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("i", $user_id);
         $stmt->execute();
 
-        header("Location: painel.php");
+        header("Location: ../html/tela_principal.html");
         exit;
     } else {
         $erro = "Código inválido ou expirado. Tente novamente.";
@@ -36,17 +36,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="utf-8">
     <title>Verificação 2FA</title>
+    <link rel="stylesheet" href="../css/verificar_2fa.css">
 </head>
 <body>
-    <h1>Digite o código do Google Authenticator</h1>
-    <form method="POST">
-        <input type="text" name="codigo" required maxlength="6" pattern="\d{6}" placeholder="123456" />
-        <button type="submit">Verificar</button>
-    </form>
-    <?php if (isset($erro)) echo "<p style='color:red;'>$erro</p>"; ?>
+    <div class="cabeçalho">
+        <a href="../html/bem_vindo.html">
+            <img src="../imagens/logo_steam.svg" alt="Logo GameWorld" class="logo" />
+        </a>
+    </div>
+    <div class="container">
+        <h1>Digite o código do Google Authenticator</h1>
+        <form method="POST">
+            <input type="text" name="codigo" required maxlength="6" pattern="\d{6}" placeholder="123456" />
+            <button type="submit">Verificar</button>
+        </form>
+        <?php if (isset($erro)) echo "<p>$erro</p>"; ?>
+    </div>
 </body>
 </html>

@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Validar Código</title>
-    <link rel="stylesheet" href="../css/validar.css">
+    <link rel="stylesheet" href="../css/validar_codigo.css">
 </head>
 <body>
-    <form id="formCodigo">
-        <h1>Validar Código</h1>
-        <input type="text" id="codigo" name="codigo" placeholder="Digite o código recebido" required><br>
-        <button type="button" onclick="validarCodigo()">Validar</button>
-    </form>
+    <div class="cabeçalho">
+        <a href="bem_vindo.html">
+            <img src="../imagens/logo_steam.svg" alt="Logo GameWorld" class="logo" />
+        </a>
+    </div>
+
+    <div class="container">
+        <form id="formCodigo">
+            <h1>Validar Código</h1>
+            <input type="text" id="codigo" name="codigo" placeholder="Digite o código recebido" required><br>
+            <button type="button" onclick="validarCodigo()">Validar</button>
+        </form>
+    </div>
 
     <script src="../js/validar_codigo.js"></script>
 </body>

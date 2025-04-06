@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1c1c1c; 
+    color: #00ffff;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    background-image: url('../imagens/teste.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    position: relative;
+      
+}
+
+.nav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgba(30, 30, 30, 0.9); 
+    z-index: 10;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 0;
+  }
+
+  .cabeçalho {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 20px;
+    background-color: rgba(30, 30, 30, 0.9); 
+    z-index: 10;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .cabeçalho .logo {
+    height: 40px;
+  }
+
+  .botoes-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .botao-header {
+    background-color: transparent;
+    color: #00ffff;
+    border: 1px solid #00ffff;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: 0.3s;
+    text-decoration: none;
+  }
+
+  .botao-header:hover {
+    background-color: #00ffff;
+    color: #000;
+  }
+
+  .main-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 100px 20px 40px;
+    position: relative;
+    z-index: 1;
+    gap: 40px;
+  }
+
+  .text-section, .right-section {
+    flex: 1 1 500px;
+    max-width: 700px;
+  }
+
+  .text-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px;
+    text-align: left;
+  }
+
+  .slogan {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #00ffff;
+  }
+
+  .quem-somos {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #d1faff;
+  }
+
+  .quem-somos ul {
+    padding-left: 20px;
+  }
+
+  .quem-somos li {
+    margin-bottom: 8px;
+  }
+
+  .quem-somos p.final {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    color: #00ffff;
+  }
+
+  .right-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .videos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    color: #00ffff;
+    text-shadow: 1px 1px 2px black;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .videos-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .youtube-video {
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .slogan {
+      font-size: 2rem;
+    }
+
+    .quem-somos p.final {
+      font-size: 1rem;
+    }
+  }

@@ -37,7 +37,7 @@ try {
     $mail->Port = 465;
 
     // Remetente
-    $mail->setFrom('pedroarthurmeloestudos@gmail.com', 'Nome do Nosso Site');
+    $mail->setFrom('pedroarthurmeloestudos@gmail.com', 'GameWorld');
 
     // Destinatário
     $mail->addAddress($email); // E-mail do usuário
@@ -51,7 +51,7 @@ try {
     <html>
         <body>
             <p>Olá! Clique no botão abaixo para verificar seu e-mail e ativar sua conta:</p>
-            <a href='$verificationLink' style='background-color: #4CAF50; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 8px;'>Confirmar E-mail</a>
+            <a href='$verificationLink' style='background-color:rgb(7, 154, 154); color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 8px;'>Confirmar E-mail</a>
         </body>
     </html>
     ";

@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Recuperar Senha</title>
-    <link rel="stylesheet" href="../css/recuperar.css">
+    <link rel="stylesheet" href="../css/recuperar_senha.css">
 </head>
 <body>
-    <form id="formRecuperacao">
-        <h1>Recuperar Senha</h1>
-        <input type="email" name="email" id="email" placeholder="Digite seu e-mail" required><br>
-        <button type="button" onclick="enviarCodigo()">Enviar Código</button>
-    </form>
+    <div class="cabeçalho">
+        <a href="bem_vindo.html">
+            <img src="../imagens/logo_steam.svg" alt="Logo GameWorld" class="logo" />
+        </a>
+    </div>
+    <div class="container">
+        <form id="formRecuperacao">
+            <h1>Recuperar Senha</h1>
+            <input type="email" name="email" id="email" placeholder="Digite seu e-mail" required><br>
+            <button type="button" onclick="enviarCodigo()">Enviar Código</button>
+        </form>
+    </div>
 
     <script src="../js/recuperar_senha.js"></script>
 </body>

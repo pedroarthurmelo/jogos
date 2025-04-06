@@ -43,7 +43,7 @@ try {
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
 
-    $mail->setFrom('pedroarthurmeloestudos@gmail.com', 'Recuperação de Senha');
+    $mail->setFrom('pedroarthurmeloestudos@gmail.com', 'Recuperação de Senha GameWorld');
     $mail->addAddress($email);
 
     $mail->Subject = "Código de Verificação";
