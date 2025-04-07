@@ -56,9 +56,10 @@ $qrCodeUrl = GoogleQrUrl::generate($user, $secret, $issuer);
             <img src="../imagens/logo_steam.svg" alt="Logo GameWorld" class="logo" />
         </a>
     </div>
+
     <div class="container">
         <h1>Registre o QR Code no Google Authenticator</h1>
-        <img src="<?php echo htmlspecialchars($qrCodeUrl); ?>" alt="QR Code">
+        <img src="<?php echo htmlspecialchars($qrCodeUrl); ?>" class="qrcode"alt="QR Code" >
         <p>Ou insira manualmente: <strong><?php echo $secret; ?></strong></p>
         <p>Depois de escanear o código, clique abaixo:</p>
         

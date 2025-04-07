@@ -17,18 +17,20 @@ function registrar() {
     let regexTelefone = /^\([1-9]{2}\)\s?9?\s?[0-9]{4}-[0-9]{4}$/;
     let regexSenha = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!.])[0-9a-zA-Z$*&@#!.]{8,}$/;
 
-    if (usuario == null){
-            window.alert("Não pode estar vazio!");
+    if (usuario == ""){
+        window.alert("Usuário não pode estar vazio!");
+        return;
     }
 
-    if (nome_completo == null){
-            window.alert("Não pode estar vazio!");
+    if (nome_completo == ""){
+        window.alert("Nome Completo não pode estar vazio!");
+        return;
     }
 
         // Validando email
     if (regexEmail.test(email) == false) {
-            window.alert("Email precisa ser válido (EX: teste@dominio.com)");
-            return;
+        window.alert("Email precisa ser válido (EX: teste@dominio.com)");
+        return;
     }
 
     // Validando CPF

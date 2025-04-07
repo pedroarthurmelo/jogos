@@ -20,17 +20,22 @@ body {
     position: relative;
 }
 
-.nav, .cabeçalho {
+.cabeçalho {
     position: fixed;
     top: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    background-color: rgba(30, 30, 30, 0.9);
+    align-items: center;
+    padding: 13px 20px;
+    background-color: rgba(30, 30, 30, 0.9); 
     z-index: 10;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-}
+  }
+
+  .cabeçalho .logo {
+    height: 40px;
+  }
 
 .container {
     text-align: center;
@@ -38,17 +43,15 @@ body {
     padding: 50px;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 255, 255, 0.3);
-    max-width: 600px;
-    width: 100%;
 }
 
-h1 {
+.mensagem {
     font-size: 2rem;
     margin-bottom: 30px;
     color: #00ffff;
 }
 
-img {
+.qrcode {
     margin: 20px 0;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 255, 255, 0.3);
