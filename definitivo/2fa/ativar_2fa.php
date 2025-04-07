@@ -69,4 +69,3 @@ $qrCodeUrl = GoogleQrUrl::generate($user, $secret, $issuer);
     </div>
 </body>
 </html>
-
