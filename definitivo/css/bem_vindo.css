@@ -11,7 +11,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     flex-direction: column;
     background-image: url('../imagens/teste.jpg');
     background-size: cover;
@@ -19,18 +19,6 @@ body {
     background-repeat: no-repeat;
     position: relative;
       
-}
-
-.nav{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: rgba(30, 30, 30, 0.9); 
-    z-index: 10;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 body::before {
@@ -55,7 +43,7 @@ body::before {
   }
 
   .cabeçalho .logo {
-    height: 40px;
+    height: 20px;
   }
 
   .botoes-header {
@@ -68,7 +56,7 @@ body::before {
     background-color: transparent;
     color: #00ffff;
     border: 1px solid #00ffff;
-    padding: 6px 12px;
+    padding: 2px 12px;
     border-radius: 5px;
     cursor: pointer;
     font-family: 'Inter', sans-serif;
@@ -182,3 +170,108 @@ body::before {
       font-size: 1rem;
     }
   }
+
+  @media (max-width: 480px) {
+    .cabeçalho {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 15px;
+    }
+  
+    .botoes-header {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  
+    .botao-header {
+      font-size: 0.85rem;
+      padding: 5px 10px;
+    }
+  
+    .slogan {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  
+    .quem-somos {
+      font-size: 0.9rem;
+      text-align: justify;
+    }
+  
+    .quem-somos p.final {
+      font-size: 0.95rem;
+      text-align: center;
+    }
+  
+    .youtube-video {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .cabeçalho {
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+  
+    .cabeçalho .logo {
+      height: 16px;
+    }
+  
+    .botoes-header {
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+  
+    .botao-header {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+    }
+  
+    .main-content {
+      padding: 80px 10px 30px;
+      gap: 20px;
+    }
+  
+    .text-section,
+    .right-section {
+      padding: 20px 10px;
+      flex: 1 1 100%;
+    }
+  
+    .slogan {
+      font-size: 1.3rem;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+  
+    .quem-somos {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      text-align: justify;
+    }
+  
+    .quem-somos li {
+      margin-bottom: 6px;
+    }
+  
+    .quem-somos p.final {
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  
+    .section-title {
+      font-size: 1.3rem;
+    }
+  
+    .youtube-video {
+      border-radius: 8px;
+    }
+  }
+  

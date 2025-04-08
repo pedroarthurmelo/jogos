@@ -47,6 +47,7 @@ $qrCodeUrl = GoogleQrUrl::generate($user, $secret, $issuer);
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Ativar 2FA</title>
     <link rel="stylesheet" href="../css/ativar_2fa.css">
 </head>

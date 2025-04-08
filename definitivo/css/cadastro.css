@@ -1,123 +1,206 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    background-color: #1c1c1c;
-    color: #00ffff;
-    font-family: 'Inter', sans-serif;
-    height: 100vh;
-    background-image: url('../imagens/teste.jpg');
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1c1c1c;
+  color: #00ffff;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  background-image: url('../imagens/teste.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow-x: auto;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 0;
+}
+
+.cabeçalho {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 20px;
+  background-color: rgba(30, 30, 30, 0.9); 
+  z-index: 10;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.cabeçalho .logo {
+  height: 20px;
+}
+
+/* Formulário de Cadastro */
+.formulario {
+  z-index: 1;
+  background-color: rgba(30, 30, 30, 0.95);
+  padding: 24px 32px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+}
+
+.formulario h1 {
+  font-size: 2rem;
+  color: #00ffff;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px black;
+  text-align: center;
+}
+
+.formulario input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #00ffff;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  color: #00ffff;
+  font-size: 1rem;
+}
+
+.formulario input::placeholder {
+  color: #88ffff;
+}
+
+.formulario button {
+  width: 100%;
+  padding: 12px;
+  background-color: #00ffff;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.formulario button:hover {
+  background-color: #00cccc;
+}
+
+.link-cadastro {
+  color: #00ffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 8px;
+  transition: 0.3s;
+}
+
+.link-cadastro:hover {
+  color: #88ffff;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .formulario {
     padding: 20px;
+    max-width: 90%;
   }
-  
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 0;
+
+  .formulario h1 {
+    font-size: 1.8rem;
   }
-  
+
+  .formulario input,
+  .formulario button {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formulario {
+    padding: 20px 16px;
+  }
+
+  .formulario h1 {
+    font-size: 1.5rem;
+  }
+
+  .formulario input,
+  .formulario button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .formulario {
+    padding: 16px 12px;
+  }
+
+  .formulario h1 {
+    font-size: 1.3rem;
+  }
+
+  .formulario input,
+  .formulario button {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  .link-cadastro {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
   .cabeçalho {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 13px 20px;
-    background-color: rgba(30, 30, 30, 0.9); 
-    z-index: 10;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    flex-direction: column;
+    padding: 10px;
+    gap: 8px;
+    text-align: center;
   }
 
   .cabeçalho .logo {
-    height: 40px;
+    height: 18px;
   }
-  
-  /* Formulário de Cadastro */
+}
+
+@media (max-width: 320px) {
   .formulario {
-    z-index: 1;
-    background-color: rgba(30, 30, 30, 0.95);
-    padding: 40px 30px;
-    border-radius: 16px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 500px;
+    padding: 12px 10px;
   }
-  
+
   .formulario h1 {
-    font-size: 2rem;
-    color: #00ffff;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 2px black;
+    font-size: 1.2rem;
   }
-  
-  .formulario input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #00ffff;
-    border-radius: 8px;
-    background-color: #1a1a1a;
-    color: #00ffff;
-    font-size: 1rem;
-  }
-  
-  .formulario input::placeholder {
-    color: #88ffff;
-  }
-  
+
+  .formulario input,
   .formulario button {
-    width: 100%;
-    padding: 12px;
-    background-color: #00ffff;
-    border: none;
-    color: #000;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
+    font-size: 0.8rem;
+    padding: 7px;
   }
-  
-  .formulario button:hover {
-    background-color: #00cccc;
-  }
-  
+
   .link-cadastro {
-    color: #00ffff;
-    text-decoration: none;
-    font-size: 0.9rem;
-    margin-top: 8px;
-    transition: 0.3s;
+    font-size: 0.75rem;
   }
-  
-  .link-cadastro:hover {
-    color: #88ffff;
-    text-decoration: underline;
+
+  .cabeçalho {
+    padding: 8px;
+    gap: 6px;
   }
-  
-  @media (max-width: 480px) {
-    .formulario {
-      padding: 30px 20px;
-    }
-  
-    .formulario h1 {
-      font-size: 1.5rem;
-    }
+
+  .cabeçalho .logo {
+    height: 16px;
   }
-  
+}

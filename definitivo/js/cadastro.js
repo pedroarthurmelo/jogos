@@ -47,7 +47,7 @@ function registrar() {
 
     // Validando senha
     if (regexSenha.test(senha) == false) {
-        window.alert("A senha precisa ter no mínimo 8 caracteres, entre eles, 1 número ,1 letra maiúscula e 1 símbolo.");
+        window.alert("A senha precisa ter no mínimo 8 caracteres, entre eles, 1 número , 1 letra maiúscula e 1 símbolo.");
         return;
     }
 
@@ -57,6 +57,9 @@ function registrar() {
         return;
     }
 
+
+
+    //ENVIAR PARA O PHP VIA POST
     var form = document.getElementById('formulario');
     
     var dados = new FormData(form);

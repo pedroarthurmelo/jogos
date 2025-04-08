@@ -41,7 +41,7 @@
   }
 
   .cabeçalho .logo {
-    height: 40px;
+    height: 20px;
   }
   
   /* Formulário de Login */
@@ -50,7 +50,6 @@
     background-color: rgba(30, 30, 30, 0.95);
     padding: 40px 30px;
     border-radius: 16px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -119,4 +118,84 @@
       font-size: 1.5rem;
     }
   }
+
+  @media (max-width: 375px) {
+    .cabeçalho {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      text-align: center;
+    }
+  
+    .cabeçalho .logo {
+      height: 18px;
+    }
+  
+    .formulario {
+      padding: 28px 20px;
+      max-width: 95%;
+      border-radius: 14px;
+    }
+  
+    .formulario h1 {
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+  
+    .formulario input {
+      padding: 11px;
+      font-size: 1rem;
+    }
+  
+    .formulario button {
+      padding: 11px;
+      font-size: 1rem;
+    }
+  
+    .link-cadastro {
+      font-size: 0.88rem;
+    }
+  }
+  
+
+  @media (max-width: 320px) {
+    .cabeçalho {
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+  
+    .cabeçalho .logo {
+      height: 16px;
+    }
+  
+    .formulario {
+      padding: 24px 16px;
+      max-width: 95%;
+      border-radius: 12px;
+    }
+  
+    .formulario h1 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+  
+    .formulario input {
+      padding: 10px;
+      font-size: 0.95rem;
+    }
+  
+    .formulario button {
+      padding: 10px;
+      font-size: 0.95rem;
+    }
+  
+    .link-cadastro {
+      font-size: 0.85rem;
+    }
+  }
+  
   
