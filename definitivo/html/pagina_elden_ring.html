@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Elden Ring</title>
+    <link rel="stylesheet" href="../css/pagina_jogos.css">
+</head>
+<body>
+    <div class="nav" id="nav">
+        <a href="../html/tela_principal.html" class="nav-logo-text">CriticAnalytics</a>
+    
+        <div class="nav-buttons">
+            <a href="../html/pagina_lista.html" class="nav-button">Minha Lista</a>
+            <a href="../html/pagina_noticias.html" class="nav-button">Notícias</a>
+        </div>
+    
+        <a href="../html/pagina_perfil.html" class="nav-user">Usuário</a>
+    </div>
+
+    <div class="caixa">
+        <div class="caixa-interna">
+            <h1>CRÍTICA | ELDEN RING</h1><br>
+            <div class="sinopse">
+                <img src="../imagens/elden_ring.webp" alt="Imagem do Elden Ring" width="250px" >
+                <div class="texto-sinopse">
+                    <h2>SINOPSE:</h2><br/>
+                    <p>ELDEN RING, desenvolvido pela FromSoftware, Inc. e pela BANDAI NAMCO Entertainment Inc., é uma aventura de RPG de ação e fantasia ambientada em
+                         um mundo criado por 
+                        Hidetaka Miyazak e George R. R. Martin. O perigo e a descoberta estão à espreita em cada canto do maior jogo da FromSoftware até hoje.</p><br>
+                    <br>
+                    
+                    <div class="alinhar">
+                        <div class="emendo">
+                            <h3>Criadora:</h3><br>
+                            <p>From Software</p><br><br>
+
+                            <h3>Generos:</h3><br>
+                            <p>Souls like/RPG de ação/Mundo Aberto</p>
+                        </div>
+                        <div class="emendo">
+                            <h3>Plataformas:</h3><br>
+                            <p>PC/PS4/XBOX</p><br><br>
+
+                            <h3>Avaliação:</h3><br>
+                            <p>⭐(9,5/10)</p>
+                        </div>
+                        <div class="emendo">
+                            <h3>Data de Lançamento:</h3><br>
+                            <p>25 de fevereiro de 2022</p><br><br>
+
+                            <button class="like-button" id="likeBtn">👍</button><br><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <h2>Requisitos do Sistema:</h2><br>
+            <div class="alinhar">
+                <div class="requisitos">
+                    <h3>Mínimos</h3><br>
+                    <h4>SO:</h4><p1> Windows 10</p1><br><br>
+                    <h4>Processador:</h4><p1>INTEL CORE I5-8400 or AMD RYZEN 3 3300X</p1><br><br>
+                    <h4>Memória:</h4><p1> 12 GB de RAM</p1><br><br>
+                    <h4>Placa de vídeo:</h4><p1>NVIDIA GEFORCE GTX 1060 3 GB or AMD RADEON RX 580 4 GB</p1><br><br>
+                    <h4>Armazenamento:</h4><p1>60 GB de espaço disponível</p1><br><br>
+                </div>
+                <div class="requisitos">
+                    <h3>Recomendados</h3><br>
+                    <h4>SO:</h4><p1> Windows 10</p1><br><br>
+                    <h4>Processador:</h4><p1>INTEL CORE I7-8700K or AMD RYZEN 5 3600X</p1><br><br>
+                    <h4>Memória:</h4><p1>16 GB de RAM</p1><br><br>
+                    <h4>Placa de vídeo:</h4><p1>NVIDIA GEFORCE GTX 1070 8 GB or AMD RADEON RX VEGA 56 8 GB</p1><br><br>
+                    <h4>Armazenamento:</h4><p1>60 GB de espaço disponível</p1><br><br>
+                </div>
+            </div>
+
+            <h2>Comentarios da Comunidade:</h2>
+            <div class="texto_critica">
+                <h3>Usuário1:</h3>
+                <p>Elden Ring é simplesmente INCRÍVEL! O combate é intenso e desafiador, cada confronto exige estratégia e adaptação, 
+                    é uma sensação de vitória garantida depois de cada chefão. O level design? Impecável! Os cenários são vastos, cheios de segredos e 
+                    detalhes que fazem a exploração valer cada minuto. 
+                    De dungeons sinuosas a paisagens de tirar o fôlego, tudo conectado de um jeito que só a From Software sabe fazer.</p><br><br>
+
+                <h3>Usuario2:</h3>
+                <p>jogão top, só progressão que é lenta, principalmente se for 100% na raça. Mas já eh de se esperar de um souls</p>
+            </div>
+        </div>
+    </div>  
+
+    <script>
+        const likeBtn = document.getElementById('likeBtn');
+    
+        likeBtn.addEventListener('click', () => {
+            likeBtn.classList.toggle('liked');
+        });
+    </script>
+</body>
+</html>
