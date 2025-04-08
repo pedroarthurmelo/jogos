@@ -157,3 +157,51 @@ li {
 .botao-editar:hover {
     background-color: #cdb900e3;
 }
+
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px;
+    }
+    .nav-buttons {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        margin-top: 10px;
+    }
+    .nav-button, .nav-user {
+        width: 100%;
+        text-align: center;
+    }
+    .perfil-container {
+        padding: 10px;
+        margin-top: 160px; 
+    }
+    .perfil-caixa {
+        padding: 20px;
+    }
+    .info-dividida {
+        flex-direction: column;
+    }
+    .box {
+        width: 100%;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.3rem;
+    }
+    .linha {
+        font-size: 1rem;
+    }
+    li {
+        font-size: 0.95rem;
+    }
+    .botao-editar {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+}
