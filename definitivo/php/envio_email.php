@@ -44,7 +44,7 @@ try {
 
     // Assunto e corpo do e-mail
     $subject = "Verifique seu E-mail";
-    $verificationLink = "http://localhost/jogos/definitivo/php/confirmar_email.php?email=" . urlencode($email);        // Link de verificação
+    $verificationLink = "http://localhost/jogos/definitivo/php/confirmar_email.php?email=" . urlencode($email). "&token=$token_ativacao";        // Link de verificação
 
     // Criando o botão HTML para o e-mail
     $htmlContent = "

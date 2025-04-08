@@ -14,7 +14,7 @@ function registrar() {
     // EXPRESSÕES REGULARES
     let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let regexCPF = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
-    let regexTelefone = /^\([1-9]{2}\)\s?9?\s?[0-9]{4}-[0-9]{4}$/;
+    let regexTelefone = /^\([1-9]{2}\)\s?(9[0-9]{4}|[2-8][0-9]{3})-[0-9]{4}$/
     let regexSenha = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!.])[0-9a-zA-Z$*&@#!.]{8,}$/;
 
     if (usuario == ""){

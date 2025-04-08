@@ -38,8 +38,8 @@ $stmt->bind_param("si", $secret, $user_id);
 $stmt->execute();
 
 // Gera QR code
-$user = 'usuario_' . $user_id;
-$issuer = 'CriticaJogos';
+$user = 'Pedro' . $user_id;
+$issuer = 'GameWorld';
 $qrCodeUrl = GoogleQrUrl::generate($user, $secret, $issuer);
 ?>
 
