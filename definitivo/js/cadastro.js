@@ -1,4 +1,4 @@
-function registrar() {
+function cadastrar() {
     let usuario = document.getElementById("username").value;
     let nome_completo = document.getElementById("nome_completo").value;
     let email = document.getElementById("email").value;
