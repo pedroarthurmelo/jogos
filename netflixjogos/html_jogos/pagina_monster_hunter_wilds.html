@@ -9,8 +9,14 @@
 <body>
     <!--parte de cima do header-->
     <div class="nav" id="nav">
-        <img src="../imagens/logo_steam.svg" class="nav-logo" alt="">
-        <img src="../imagens/avatar.webp" class="nav-avatar" alt="">
+        <a href="../html/tela_principal.html" class="nav-logo-text">CriticAnalytics</a>
+    
+        <div class="nav-buttons">
+            <a href="../html/pagina_lista.html" class="nav-button">Minha Lista</a>
+            <a href="../html/pagina_noticias.html" class="nav-button">Notícias</a>
+        </div>
+    
+        <a href="../html/pagina_perfil.html" class="nav-user">Usuário</a>
     </div>
 
     <div class="caixa">
@@ -20,32 +26,31 @@
                 <img src="../imagens/monster_hunter_wilds.webp" alt="Imagem do Elden Ring" width="250px" >
                 <div class="texto-sinopse">
                     <h2>SINOPSE:</h2><br/>
-                    <p1>Monster Hunter Wilds é uma história em que monstros e humanos coexistem nas Terras Proibidas, 
-                        um mundo que abarca duas realidades: uma de terras inóspitas e impiedosas, 
-                        nas quais monstros brigam por recursos escassos, e outra de terras exuberantes e que transbordam de vida.</p1><br>
+                    <p>Monster Hunter Wilds é uma história em que monstros e humanos coexistem nas Terras Proibidas, 
+                        um mundo que abarca duas realidades: uma de terras inóspitas e impiedosas, nas quais monstros 
+                        brigam por recursos escassos, e outra de terras exuberantes e que transbordam de vida.</p><br>
                     <br>
                     
                     <div class="alinhar">
                         <div class="emendo">
                             <h3>Criadora:</h3><br>
-                            <p2>Capcom</p2><br><br>
+                            <p>Capcom</p><br><br>
 
                             <h3>Generos:</h3><br>
-                            <p4>RPG de ação/Mundo Aberto</p4>
+                            <p4>Ação/Aventura/RPG</p4>
                         </div>
                         <div class="emendo">
                             <h3>Plataformas:</h3><br>
-                            <p3>PC/PS4/XBOX</p3><br><br>
+                            <p>PC/PS4/XBOX</p><br><br>
 
                             <h3>Avaliação:</h3><br>
-                            <p4>(Estrela de Avaliação)</p4>
+                            <p>(Estrela de Avaliação)</p>
                         </div>
                         <div class="emendo">
                             <h3>Data de Lançamento:</h3><br>
-                            <p3>28 de fevereiro de 2025</p3><br><br>
+                            <p>28 de fevereiro de 2025</p><br><br>
 
-                            <button>(coração, favoritar)</button><br><br>
-                            <a href="../html_review/review_mosnter_hunter_wilds.html"><button class="botao">Review</button></a><br>
+                            <button class="like-button" id="likeBtn">👍</button><br><br>
                         </div>
                     </div>
                 </div>
@@ -57,21 +62,39 @@
                 <div class="requisitos">
                     <h3>Mínimos</h3><br>
                     <h4>SO:</h4><p1> Windows 10</p1><br><br>
-                    <h4>Processador:</h4><p1>Intel® Core™ i5-10400 or Intel® Core™ i3-12100 or AMD Ryzen™ 5 3600</p1><br><br>
-                    <h4>Memória:</h4><p1>16 GB de RAM</p1><br><br>
-                    <h4>Placa de vídeo:</h4><p1> NVIDIA® GeForce® GTX 1660(VRAM 6GB) or AMD Radeon™ RX 5500 XT(VRAM 8GB)</p1><br><br>
+                    <h4>Processador:</h4><p1>Intel Core i5-10400, Intel Core i3-12100 ou AMD Ryzen 5 3600</p1><br><br>
+                    <h4>Memória:</h4><p1>16GB</p1><br><br>
+                    <h4>Placa de vídeo:</h4><p1>GeForce GTX 1660 (6GB VRAM) ou Radeon RX 5500 XT (8GB VRAM)</p1><br><br>
                     <h4>Armazenamento:</h4><p1>75 GB de espaço disponível</p1><br><br>
                 </div>
                 <div class="requisitos">
                     <h3>Recomendados</h3><br>
                     <h4>SO:</h4><p1> Windows 10</p1><br><br>
-                    <h4>Processador:</h4><p1>Intel® Core™ i5-10400 or Intel® Core™ i3-12100 or AMD Ryzen™ 5 3600</p1><br><br>
+                    <h4>Processador:</h4><p1>Intel Core i5-10400, Intel Core i3-12100 ou AMD Ryzen 5 3600</p1><br><br>
                     <h4>Memória:</h4><p1>16 GB de RAM</p1><br><br>
-                    <h4>Placa de vídeo:</h4><p1>NVIDIA® GeForce® RTX 2060 Super(VRAM 8GB) or AMD Radeon™ RX 6600(VRAM 8GB)</p1><br><br>
+                    <h4>Placa de vídeo:</h4><p1>GeForce RTX 2060 Super (8GB VRAM) ou Radeon RX 6600 (8GB VRAM)</p1><br><br>
                     <h4>Armazenamento:</h4><p1>75 GB de espaço disponível</p1><br><br>
                 </div>
             </div>
+            <h2>Comentarios da Comunidade:</h2>
+            <div class="texto_critica">
+                <h3>Usuário1:</h3>
+                <p>o bagulho ta tão mal optimizado que simplesmente reinicia o meu PC, vi várias outras pessoas com o mesmo problema. O jeito é aguardar mesmo.</p><br><br>
+
+                <h3>Usuario2:</h3>
+                <p>Monster Hunter Wilds é uma experiência que realmente me impressionou como fã da série. 
+                    O jogo consegue equilibrar a essência dos títulos anteriores com algumas inovações que tornam a jogabilidade ainda mais fluida e interessante.</p>
+            </div>
         </div>
-    </div>    
+    </div>  
+    
+    
+    <script>
+        const likeBtn = document.getElementById('likeBtn');
+    
+        likeBtn.addEventListener('click', () => {
+            likeBtn.classList.toggle('liked');
+        });
+    </script>
 </body>
 </html>
