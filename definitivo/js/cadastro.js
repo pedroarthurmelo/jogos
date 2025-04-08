@@ -14,7 +14,7 @@ function registrar() {
     // EXPRESSÕES REGULARES
     let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let regexCPF = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
-    let regexTelefone = /^\([1-9]{2}\)\s?(9[0-9]{4}|[2-8][0-9]{3})-[0-9]{4}$/
+    let regexTelefone = /^\(\d{2}\)\s?(9\s?\d{4}|\d{4})-\d{4}$/;
     let regexSenha = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!.])[0-9a-zA-Z$*&@#!.]{8,}$/;
 
     if (usuario == ""){
@@ -41,7 +41,7 @@ function registrar() {
 
     // Validando telefone
     if (regexTelefone.test(telefone) == false) {
-        window.alert("Telefone apenas nesse formato -> (xx) 9xxxx-xxxx ou (xx) 9 xxxx-xxxx");
+        window.alert("Telefone apenas nesses formato -> (xx) 9xxxx-xxxx, (xx) 9 xxxx-xxxx, (xx) xxxx-xxxx ou ");
         return;
     }
 
