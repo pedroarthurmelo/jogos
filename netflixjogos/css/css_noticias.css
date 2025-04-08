@@ -19,20 +19,57 @@ body {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    background-color: rgba(30, 30, 30, 0.9); /* Fundo levemente opaco */
+    align-items: center;
+    padding: 20px 50px;
+    background-color: rgba(30, 30, 30, 0.9);
     z-index: 10;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.nav-logo {
-    width: 90px;
-    object-fit: contain;
+.nav-logo-text {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.nav-avatar {
-    width: 40px;
-    object-fit: contain;
+.nav-logo-text:hover {
+    color: #00bfff; /
+}
+
+
+.nav-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-button {
+    background-color: #444;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #00bfff;
+    color: #000;
+}
+
+
+.nav-user {
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-user:hover {
+    color: #00bfff;
 }
 
 h1, h2, h3, h4 {
