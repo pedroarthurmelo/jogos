@@ -49,10 +49,10 @@ img {
 }
 
 .banner {
-    background-image: url(../imagens/#);
+    background-image: url(../imagens/homemaranha2.jpg);
     background-size: cover;
-    background-position: center center;
-    height: 448px;
+    background-position: center top;
+    height: 100%;
     color: white;
     object-fit: contain;
 }
@@ -152,6 +152,9 @@ img {
     display: flex;
     align-items: center;
     position: relative;
+}
+h2{
+   color: #00ffff
 }
 
 
