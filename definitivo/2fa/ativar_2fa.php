@@ -38,7 +38,7 @@ $stmt->bind_param("si", $secret, $user_id);
 $stmt->execute();
 
 // Gera QR code
-$user = 'Pedro' . $user_id;
+$user = 'Pedro e Douglas' . $user_id;
 $issuer = 'GameWorld';
 $qrCodeUrl = GoogleQrUrl::generate($user, $secret, $issuer);
 ?>
@@ -53,9 +53,7 @@ $qrCodeUrl = GoogleQrUrl::generate($user, $secret, $issuer);
 </head>
 <body>
     <div class="cabeçalho">
-        <a href="../html/bem_vindo.html">
-            <img src="../imagens/logo_steam.svg" alt="Logo GameWorld" class="logo" />
-        </a>
+    <a href="bem_vindo.html" class="nav-logo-text">GameWorld</a>
     </div>
 
     <div class="container">
