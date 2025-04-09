@@ -42,6 +42,18 @@ body::before {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
+.nav-logo-text {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-logo-text:hover {
+    color: #00bfff; /
+  }
+
 .cabeçalho .logo {
     height: 24px;
 }

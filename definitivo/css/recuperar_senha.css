@@ -39,6 +39,19 @@ body::before {
   width: 100%;
 }
 
+.nav-logo-text {
+  color: #fff;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-logo-text:hover {
+  color: #00bfff; /
+}
+
+
 .cabeçalho {
   position: fixed;
   top: 0;

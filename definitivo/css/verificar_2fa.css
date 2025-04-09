@@ -57,6 +57,18 @@ body::before {
     z-index: 1;
 }
 
+.nav-logo-text {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-logo-text:hover {
+    color: #00bfff; /
+  }
+
 h1 {
     font-size: 2rem;
     margin-bottom: 30px;

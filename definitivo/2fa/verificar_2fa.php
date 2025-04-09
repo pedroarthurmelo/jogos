@@ -45,9 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="cabeçalho">
-        <a href="../html/bem_vindo.html">
-            <img src="../imagens/logo_steam.svg" alt="Logo GameWorld" class="logo" />
-        </a>
+    <a href="bem_vindo.html" class="nav-logo-text">GameWorld</a>
     </div>
     <div class="container">
         <h1>Digite o código do Google Authenticator</h1>
