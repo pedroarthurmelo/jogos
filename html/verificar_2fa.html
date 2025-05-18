@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Verificar 2FA</title>
+    <link rel="stylesheet" href="../css/verificar_2fa.css">
+</head>
+<body>
+    <div class="cabeçalho">
+        <a href="bem_vindo.html" class="nav-logo-text">GameWorld</a>
+    </div>
+
+    <div class="container">
+        <h1>Digite o código do Google Authenticator</h1>
+        <form id="verificarForm">
+            <input type="text" name="codigo" required maxlength="6" pattern="\d{6}" placeholder="123456" />
+            <button type="submit">Verificar</button>
+        </form>
+        <p id="mensagem"></p>
+    </div>
+
+    <script src="../js/verificar_2fa.js"></script>
+</body>
+</html>
