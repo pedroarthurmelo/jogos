@@ -16,20 +16,29 @@ if (!$email) {
     exit;
 }
 
-// Verifica se o e-mail existe no banco
-$sql = "SELECT * FROM usuarios WHERE email = '$email'";
-$result = mysqli_query($con, $sql);
+// Verifica se o e-mail existe no banco com prepared statement
+$sql = "SELECT * FROM usuarios WHERE email = ?";
+$stmt = mysqli_prepare($con, $sql);
+mysqli_stmt_bind_param($stmt, "s", $email);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 if (mysqli_num_rows($result) == 0) {
     echo json_encode(['status' => 'error', 'message' => 'E-mail não encontrado.']);
     exit;
 }
+mysqli_stmt_close($stmt);
 
+// Gera código e validade
 $codigo = rand(100000, 999999);
 $expiracao = date("Y-m-d H:i:s", strtotime("+10 minutes"));
 
-// Armazena o código e a validade na tabela (você pode criar uma tabela de recuperação de senha)
-mysqli_query($con, "INSERT INTO codigos_recuperacao (email, codigo, expiracao) VALUES ('$email', '$codigo', '$expiracao')");
+// Armazena o código usando prepared statement
+$insertSql = "INSERT INTO codigos_recuperacao (email, codigo, expiracao) VALUES (?, ?, ?)";
+$insertStmt = mysqli_prepare($con, $insertSql);
+mysqli_stmt_bind_param($insertStmt, "sis", $email, $codigo, $expiracao);
+mysqli_stmt_execute($insertStmt);
+mysqli_stmt_close($insertStmt);
 
 // Enviar e-mail com PHPMailer
 $mail = new PHPMailer(true);

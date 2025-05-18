@@ -10,8 +10,12 @@ if (!$email || !$codigo) {
     exit;
 }
 
-$query = "SELECT * FROM codigos_recuperacao WHERE email = '$email' AND codigo = '$codigo' AND expiracao >= NOW() ORDER BY id DESC LIMIT 1";
-$result = mysqli_query($con, $query);
+// Usando prepared statement para consultar o código de recuperação
+$query = "SELECT * FROM codigos_recuperacao WHERE email = ? AND codigo = ? AND expiracao >= NOW() ORDER BY id DESC LIMIT 1";
+$stmt = mysqli_prepare($con, $query);
+mysqli_stmt_bind_param($stmt, "ss", $email, $codigo);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 if (mysqli_num_rows($result) > 0) {
     // Código válido
@@ -19,4 +23,7 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Código inválido ou expirado.']);
 }
+
+// Fechar o statement
+mysqli_stmt_close($stmt);
 ?>

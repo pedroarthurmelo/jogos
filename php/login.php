@@ -6,9 +6,12 @@ header("Content-Type: application/json");
 $email = $_POST["email"];
 $senha = $_POST["senha"];
 
-// Verifica se o usuário existe pelo email
-$query = "SELECT * FROM usuarios WHERE email = '$email'";
-$result = mysqli_query($con, $query);
+// Usando prepared statement para verificar o usuário
+$query = "SELECT * FROM usuarios WHERE email = ?";
+$stmt = mysqli_prepare($con, $query);
+mysqli_stmt_bind_param($stmt, "s", $email);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 if (mysqli_num_rows($result) > 0) {
     $user = mysqli_fetch_assoc($result);
@@ -40,4 +43,7 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     echo json_encode(["status" => "error", "message" => "Usuário não encontrado."]);
 }
+
+// Fechar o statement
+mysqli_stmt_close($stmt);
 ?>

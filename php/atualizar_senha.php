@@ -10,10 +10,15 @@ if (!$email || !$novaSenha) {
     exit;
 }
 
-$query = "UPDATE usuarios SET senha = '$novaSenha' WHERE email = '$email'";
-if (mysqli_query($con, $query)) {
-    // Remove códigos antigos (boa prática)
-    mysqli_query($con, "DELETE FROM codigos_recuperacao WHERE email = '$email'");
+// Atualiza a senha
+$stmt = $con->prepare("UPDATE usuarios SET senha = ? WHERE email = ?");
+$stmt->bind_param("ss", $novaSenha, $email);
+if ($stmt->execute()) {
+    //deletar os códigos antigos
+    $deleteStmt = $con->prepare("DELETE FROM codigos_recuperacao WHERE email = ?");
+    $deleteStmt->bind_param("s", $email);
+    $deleteStmt->execute();
+
     echo json_encode(['status' => 'success']);
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Erro ao atualizar senha.']);
