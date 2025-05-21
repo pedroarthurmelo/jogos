@@ -1,5 +1,7 @@
 <?php
-include "conexao.php";
+require_once __DIR__ . '/config.php'; // carrega variáveis do .env
+require_once "conexao.php";
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -45,14 +47,14 @@ $mail = new PHPMailer(true);
 
 try {
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
-    $mail->Username = 'pedroarthurmeloestudos@gmail.com';
-    $mail->Password = 'rtfh edau lzdd xqiy'; // Senha de app
-    $mail->SMTPSecure = 'ssl';
-    $mail->Port = 465;
+    $mail->Host       = $_ENV['MAIL_HOST'];
+    $mail->SMTPAuth   = true;
+    $mail->Username   = $_ENV['MAIL_USERNAME'];
+    $mail->Password   = $_ENV['MAIL_PASSWORD'];
+    $mail->SMTPSecure = $_ENV['MAIL_ENCRYPTION'];
+    $mail->Port       = (int) $_ENV['MAIL_PORT'];
 
-    $mail->setFrom('pedroarthurmeloestudos@gmail.com', 'Recuperação de Senha GameWorld');
+    $mail->setFrom($_ENV['MAIL_FROM'], $_ENV['MAIL_FROM_NAME']);
     $mail->addAddress($email);
 
     $mail->Subject = "Código de Verificação";

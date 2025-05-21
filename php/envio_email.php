@@ -1,6 +1,6 @@
 <?php
-
-include "conexao.php";
+require_once __DIR__ . '/config.php';
+require_once "conexao.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -28,26 +28,25 @@ if (mysqli_stmt_execute($stmt)) {
     $mail = new PHPMailer(true);
 
     try {
-        // Configurações do SMTP com SSL explícito
+        // Configurações do SMTP com dados do .env
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'pedroarthurmeloestudos@gmail.com'; // Sua conta de e-mail
-        $mail->Password = 'rtfh edau lzdd xqiy'; // Senha do app Gmail
-        $mail->SMTPSecure = 'ssl'; // Usando SSL
-        $mail->Port = 465;
+        $mail->Host       = $_ENV['MAIL_HOST'];
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $_ENV['MAIL_USERNAME'];
+        $mail->Password   = $_ENV['MAIL_PASSWORD'];
+        $mail->SMTPSecure = $_ENV['MAIL_ENCRYPTION'];
+        $mail->Port       = (int) $_ENV['MAIL_PORT'];
 
         // Remetente
-        $mail->setFrom('pedroarthurmeloestudos@gmail.com', 'GameWorld');
+        $mail->setFrom($_ENV['MAIL_FROM'], $_ENV['MAIL_FROM_NAME']);
 
         // Destinatário
-        $mail->addAddress($email); // E-mail do usuário
+        $mail->addAddress($email);
 
         // Assunto e corpo do e-mail
         $subject = "Verifique seu E-mail";
-        $verificationLink = "http://localhost/jogos/html/confirmar_email.html?email=" . urlencode($email). "&token=$token_ativacao"; // Link de verificação
+        $verificationLink = "http://localhost/jogos/html/confirmar_email.html?email=" . urlencode($email). "&token=$token_ativacao";
 
-        // Criando o botão HTML para o e-mail
         $htmlContent = "
         <html>
             <body>
@@ -58,9 +57,8 @@ if (mysqli_stmt_execute($stmt)) {
         ";
 
         $mail->Subject = $subject;
-        $mail->msgHTML($htmlContent); // Definindo o corpo do e-mail em HTML
+        $mail->msgHTML($htmlContent);
 
-        // Enviar o e-mail
         $mail->send();
         echo json_encode(['status' => 'success']);
     } catch (Exception $e) {
@@ -70,6 +68,5 @@ if (mysqli_stmt_execute($stmt)) {
     echo json_encode(['status' => 'error', 'message' => 'Erro ao cadastrar usuário.']);
 }
 
-// Fechar o statement
 mysqli_stmt_close($stmt);
 ?>
