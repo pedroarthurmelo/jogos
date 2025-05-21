@@ -1,17 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Elden Ring</title>
     <link rel="stylesheet" href="../css/pagina_jogos.css">
 </head>
-<body>
+<body data-jogo="Elden Ring">
     <div class="nav" id="nav">
         <a href="../html/tela_principal.html" class="nav-logo-text">GameWorld</a>
     
-    
-        <a href="../html/pagina_perfil.html" class="nav-user">Usuário</a>
+
+        <div class="dropdown">
+            <span class="nav-user" onclick="toggleDropdown()">Menu</span>
+            <div class="dropdown-content">
+                <a href="pagina_perfil.html">Meu Perfil</a>
+                <a href="logout.php">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="fundoBloqueador" class="overlay"></div>
+
+    <!-- alerta -->
+    <div id="alertaPersonalizado" class="alerta">
+            <span id="mensagemAlerta"></span>
+            <button onclick="fecharAlerta()">OK</button>
     </div>
 
     <div class="caixa">
@@ -77,26 +91,15 @@
                 <br><br>
                 <button class="botao-critica">Enviar</button>
             </div>
-            <h2>Comentários da Comunidade:</h2>
-            <div class="texto_critica">
-                <h3>Usuário1:</h3>
-                <p>Elden Ring é simplesmente INCRÍVEL! O combate é intenso e desafiador, cada confronto exige estratégia e adaptação, 
-                    é uma sensação de vitória garantida depois de cada chefão. O level design? Impecável! Os cenários são vastos, cheios de segredos e 
-                    detalhes que fazem a exploração valer cada minuto. 
-                    De dungeons sinuosas a paisagens de tirar o fôlego, tudo conectado de um jeito que só a From Software sabe fazer.</p><br><br>
-
-                <h3>Usuario2:</h3>
-                <p>jogão top, só progressão que é lenta, principalmente se for 100% na raça. Mas já eh de se esperar de um souls</p>
+            <h2>Críticas da Comunidade:</h2>
+            <div id="comentarios" class="texto_critica">
+                <!-- Os comentários carregados via JavaScript aparecerão aqui -->
             </div>
         </div>
     </div>  
+        <script src="../js/verificar_sessao.js"></script>
+        <script src="../js/botao_menu.js"></script>
+        <script src="../js/comentarios_jogos.js"></script>
 
-    <script>
-        const likeBtn = document.getElementById('likeBtn');
-    
-        likeBtn.addEventListener('click', () => {
-            likeBtn.classList.toggle('liked');
-        });
-    </script>
 </body>
 </html>
