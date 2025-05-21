@@ -45,7 +45,7 @@ if (mysqli_stmt_execute($stmt)) {
 
         // Assunto e corpo do e-mail
         $subject = "Verifique seu E-mail";
-        $verificationLink = "http://localhost/expcriativa-testes/html/confirmar_email.html?email=" . urlencode($email). "&token=$token_ativacao"; // Link de verificação
+        $verificationLink = "http://localhost/jogos/html/confirmar_email.html?email=" . urlencode($email). "&token=$token_ativacao"; // Link de verificação
 
         // Criando o botão HTML para o e-mail
         $htmlContent = "
