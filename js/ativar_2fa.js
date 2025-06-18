@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             if (data.qrCodeUrl) {
                 document.getElementById('qrcode').innerHTML = `<img src="${data.qrCodeUrl}" alt="QR Code" class="qrcode">`;
-                document.getElementById('codigo').innerHTML = `Ou insira manualmente: <strong>${data.secret}</strong>`;
             } else if (data.message) {
                 document.getElementById('qrcode').innerHTML = `<p>${data.message}</p>`;
             } else {
