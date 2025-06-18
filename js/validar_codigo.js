@@ -1,4 +1,19 @@
 let proximaAcao = null;
+let encryptor; // Declare encryptor globally
+
+// Fetch public key on page load
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('../php/get_public_key.php') // Adjust path if get_public_key.php is not in the same directory as this HTML
+        .then(response => response.text())
+        .then(publicKey => {
+            encryptor = new JSEncrypt();
+            encryptor.setPublicKey(publicKey);
+        })
+        .catch(error => {
+            console.error("Error fetching public key:", error);
+            mostrarAlerta('Erro ao carregar chave de segurança. Tente novamente.');
+        });
+});
 
 function mostrarAlerta(mensagem, aoConfirmar = null) {
     document.getElementById("mensagemAlerta").textContent = mensagem;
@@ -23,25 +38,67 @@ function getEmailFromURL() {
     return params.get('email');
 }
 
-function validarCodigo() {
+async function validarCodigo() { // Make function async
     const codigo = document.getElementById('codigo').value;
-    const email = getEmailFromURL();
+    const email = getEmailFromURL(); // Email vem da URL, mas será criptografado aqui
 
     if (!codigo) {
         mostrarAlerta("Por favor, preencha o código.");
         return;
     }
+    if (!email) {
+        mostrarAlerta("E-mail não encontrado na URL. Retorne e tente novamente.");
+        return;
+    }
+
+    if (!encryptor) {
+        mostrarAlerta('Chave de segurança não carregada. Aguarde ou recarregue a página.');
+        return;
+    }
+
+    // 🔐 Gerar chave AES e IV aleatórios
+    const aesKey = CryptoJS.lib.WordArray.random(16);
+    const iv = CryptoJS.lib.WordArray.random(16);
+
+    // Preparar dados a serem criptografados (e-mail e código)
+    const validationData = JSON.stringify({
+        email: email,
+        codigo: codigo
+    });
+
+    // 🔒 Criptografar os dados com AES
+    const encryptedValidationData = CryptoJS.AES.encrypt(validationData, aesKey, {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+    }).toString();
+
+    // 📦 Montar pacote da chave AES + IV
+    const keyPackage = JSON.stringify({
+        key: aesKey.toString(CryptoJS.enc.Hex),
+        iv: iv.toString(CryptoJS.enc.Hex)
+    });
+
+    // 🔐 Criptografar chave + IV com RSA
+    const encryptedKey = encryptor.encrypt(keyPackage);
+
+    if (!encryptedKey) {
+        mostrarAlerta('Erro na criptografia da chave. Tente novamente.');
+        return;
+    }
 
     let formData = new FormData();
-    formData.append('codigo', codigo);
-    formData.append('email', email);
+    formData.append('encryptedValidationData', encryptedValidationData); // Envia dados criptografados
+    formData.append('encryptedKey', encryptedKey);                         // Envia a chave AES criptografada
 
-    fetch('../php/validar_codigo.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
+    try {
+        const res = await fetch('../php/validar_codigo.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await res.json();
+
         if (data.status === "success") {
             mostrarAlerta("Código verificado com sucesso!", () => {
                 window.location.href = `../html/nova_senha.html?email=${encodeURIComponent(email)}`;
@@ -49,11 +106,10 @@ function validarCodigo() {
         } else {
             mostrarAlerta("Erro: " + data.message);
         }
-    })
-    .catch(err => {
+    } catch (err) {
         console.error("Erro:", err);
         mostrarAlerta("Erro na solicitação. Tente novamente.");
-    });
+    }
 }
 
 document.addEventListener("keydown", function(e) {
@@ -61,7 +117,6 @@ document.addEventListener("keydown", function(e) {
     const aberto = alerta && alerta.style.display === "block";
 
     if (aberto) {
-        // Permitir apenas a tecla Enter (opcional)
         if (e.key !== "Enter") {
             e.preventDefault();
             e.stopPropagation();

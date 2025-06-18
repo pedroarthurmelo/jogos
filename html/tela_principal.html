@@ -6,15 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Página Principal</title>
         <link rel="stylesheet" href="../css/tela_principal.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jsencrypt/bin/jsencrypt.min.js"></script>
     </head>
 <body>
-    <!--parte de cima do header-->
     <div class="nav" id="nav">
         <a href="../html/tela_principal.html" class="nav-logo-text">GameWorld</a>
         <div class="dropdown">
                 <span class="nav-user" onclick="toggleDropdown()">Menu</span>
                 <div class="dropdown-content">
                     <a href="pagina_perfil.html">Meu Perfil</a>
+                    <a href="../html/adicionar_jogo.html">Adicionar Jogo</a>
+                    <a href="../html/deletar_jogo.html">Deletar Jogo</a>
                     <a href="../html/logout.html">Logout</a>
                 </div>
         </div>
@@ -22,7 +25,6 @@
 
     <div id="fundoBloqueador" class="overlay"></div>
 
-    <!-- alerta -->
     <div id="alertaPersonalizado" class="alerta">
         <span id="mensagemAlerta"></span>
         <button onclick="fecharAlerta()">OK</button>
@@ -30,7 +32,6 @@
 
         
     </div>
-    <!--header-->
     <header class="banner">
         <div class="banner-contents">
             <h1 class="banner-title"> Spider Man 2</h1>
@@ -46,66 +47,23 @@
     <div class="row">
         <h2>Lançamentos</h2>
         <div class="row-container">
-            <div class="row-posters">
-                <a href="pagina_elden_ring.html">
-                    <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-                </a>
-                <a href="pagina_monster_hunter_wilds.html">
-                    <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-                </a>
+            <div class="row-posters" id="lancamentos">
             </div>
         </div>
     </div>
-    
     <div class="row">
         <h2>Popular</h2>
         <div class="row-posters">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
         </div>
     </div>
     <div class="row">
         <h2>Mais Vendidos</h2>
         <div class="row-posters">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
         </div>
     </div>
     <div class="row">
         <h2>Melhores Avaliações</h2>
         <div class="row-posters">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/elden_ring.webp" class="row-poster row-posterLarge" alt="">
-            <img src="../imagens/monster_hunter_wilds.webp" class="row-poster row-posterLarge" alt="">
         </div>
     </div>
     <script src="../js/botao_menu.js"></script>
