@@ -1,7 +1,8 @@
 <?php
-session_start(); //
-header("Content-Type: application/json"); //
-include 'conexao.php'; //
+session_start();
+require_once 'conexao.php'; // conexão com o banco
+
+header('Content-Type: application/json'); //
 
 // Carregar chave privada do servidor
 $privateKey = file_get_contents('private.pem');
@@ -38,7 +39,7 @@ if (!$requestKeyData || !isset($requestKeyData['key']) || !isset($requestKeyData
 $requestAesKey = hex2bin($requestKeyData['key']);
 $requestIv = hex2bin($requestKeyData['iv']);
 
-// 2. Descriptografar os dados da requisição (crítica e jogo ID) com a chave AES e IV
+// 2. Descriptografar os dados da requisição (ID do jogo a ser deletado) com a chave AES e IV
 $decodedEncryptedData = base64_decode($encryptedData);
 $decryptedRequestDataJson = openssl_decrypt(
     $decodedEncryptedData,
@@ -55,40 +56,58 @@ if ($decryptedRequestDataJson === false) {
 }
 
 $requestPayload = json_decode($decryptedRequestDataJson, true);
-if (!$requestPayload || !isset($requestPayload['critica']) || !isset($requestPayload['jogo'])) {
+if (!$requestPayload || !isset($requestPayload['id'])) {
     http_response_code(400);
     echo json_encode(['status' => 'error', 'message' => 'Formato inválido do payload da requisição.']);
     exit;
 }
 
-$critica = $requestPayload['critica'];
-$jogoID = intval($requestPayload['jogo']);
-$userId = $_SESSION['user_id'] ?? null; // Get user ID from session
+$id = intval($requestPayload['id']); //
 
-if (!$userId) { //
-    // If not logged in, return an error (or redirect to login on frontend)
-    $responsePayload = json_encode(['status' => 'erro', 'mensagem' => 'Usuário não autenticado']); //
+if ($id <= 0) { //
+    $responsePayload = json_encode(['sucesso' => false, 'mensagem' => 'ID do jogo inválido.']); //
 } else {
-    // Valida os dados recebidos
-    if (empty($critica) || $jogoID <= 0) { //
-        $responsePayload = json_encode(['status' => 'erro', 'mensagem' => 'Crítica vazia ou ID do jogo inválido']); //
-    } else {
-        // Prepara a query para inserir a crítica
-        $query = "INSERT INTO criticas (id_usuario, id_jogo, texto) VALUES (?, ?, ?)"; //
-        $stmt = mysqli_prepare($con, $query); //
-        mysqli_stmt_bind_param($stmt, "iis", $userId, $jogoID, $critica); //
+    // Iniciar uma transação para garantir a integridade dos dados
+    mysqli_begin_transaction($con);
 
-        if (mysqli_stmt_execute($stmt)) { //
-            $responsePayload = json_encode(['status' => 'ok', 'mensagem' => 'Crítica enviada com sucesso!']); //
+    try {
+        // Deletar registros relacionados na tabela 'criticas'
+        $stmtCriticas = $con->prepare("DELETE FROM criticas WHERE id_jogo = ?");
+        $stmtCriticas->bind_param("i", $id);
+        $stmtCriticas->execute();
+        $stmtCriticas->close();
+
+        // Deletar registros relacionados na tabela 'requisitos_sistema'
+        $stmtRequisitos = $con->prepare("DELETE FROM requisitos_sistema WHERE id_jogo = ?");
+        $stmtRequisitos->bind_param("i", $id);
+        $stmtRequisitos->execute();
+        $stmtRequisitos->close();
+
+        // Finalmente, deletar o jogo da tabela 'jogos'
+        $stmtJogo = $con->prepare("DELETE FROM jogos WHERE id = ?"); //
+        $stmtJogo->bind_param("i", $id); //
+        
+        if ($stmtJogo->execute()) { //
+            if ($stmtJogo->affected_rows > 0) { //
+                mysqli_commit($con); // Confirma a transação se tudo deu certo
+                $responsePayload = json_encode(['sucesso' => true, 'mensagem' => 'Jogo deletado com sucesso!']); //
+            } else {
+                mysqli_rollback($con); // Reverte se nenhum jogo foi afetado (não encontrado)
+                $responsePayload = json_encode(['sucesso' => false, 'mensagem' => 'Jogo não encontrado para deletar.']); //
+            }
         } else {
-            $responsePayload = json_encode(['status' => 'erro', 'mensagem' => 'Erro ao salvar crítica: ' . mysqli_error($con)]); //
+            mysqli_rollback($con); // Reverte em caso de erro na execução do delete do jogo
+            $responsePayload = json_encode(['sucesso' => false, 'mensagem' => 'Erro ao deletar jogo: ' . $stmtJogo->error]); //
         }
-        mysqli_stmt_close($stmt); //
+        $stmtJogo->close(); //
+
+    } catch (Exception $e) {
+        mysqli_rollback($con); // Reverte em caso de qualquer exceção
+        $responsePayload = json_encode(['sucesso' => false, 'mensagem' => 'Erro interno ao deletar jogo: ' . $e->getMessage()]);
     }
 }
 
-
-// 🔐 Criptografar a resposta (status da operação) com a mesma chave AES da requisição
+// 🔐 Criptografar a resposta (sucesso/erro) com a mesma chave AES da requisição
 $encryptedResponse = openssl_encrypt(
     $responsePayload,
     'aes-128-cbc',
@@ -103,9 +122,7 @@ if ($encryptedResponse === false) {
     exit;
 }
 
-// Retornar apenas a resposta criptografada. O cliente já tem a AES key e IV para descriptografar.
 echo json_encode([
     'encryptedResponse' => base64_encode($encryptedResponse)
 ]);
-mysqli_close($con); //
 ?>

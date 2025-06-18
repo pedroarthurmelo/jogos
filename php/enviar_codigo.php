@@ -11,13 +11,67 @@ require '../PHPMAILER-master/src/SMTP.php';
 
 header("Content-Type: application/json");
 
-$email = $_POST['email'] ?? '';
-
-if (!$email) {
-    echo json_encode(['status' => 'error', 'message' => 'E-mail não informado.']);
+// Carregar chave privada
+$privateKey = file_get_contents('private.pem'); // Ensure this path is correct and secure
+if (!$privateKey) {
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'Falha ao carregar a chave privada do servidor.']);
     exit;
 }
 
+$encryptedEmail = $_POST['encryptedEmail'] ?? '';
+$encryptedKey = $_POST['encryptedKey'] ?? '';
+
+if (empty($encryptedEmail) || empty($encryptedKey)) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Dados incompletos.']);
+    exit;
+}
+
+// 1. Descriptografar a chave AES (e IV) com a chave privada RSA
+$decryptedKeyJson = '';
+if (!openssl_private_decrypt(base64_decode($encryptedKey), $decryptedKeyJson, $privateKey)) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Falha na descriptografia da chave de sessão.']);
+    exit;
+}
+
+$keyData = json_decode($decryptedKeyJson, true);
+if (!$keyData || !isset($keyData['key']) || !isset($keyData['iv'])) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Formato inválido da chave de sessão.']);
+    exit;
+}
+
+$aesKey = hex2bin($keyData['key']);
+$iv = hex2bin($keyData['iv']);
+
+// 2. Descriptografar o e-mail com a chave AES e IV
+$decodedEncryptedEmail = base64_decode($encryptedEmail);
+$decryptedEmailJson = openssl_decrypt(
+    $decodedEncryptedEmail,
+    'aes-128-cbc',
+    $aesKey,
+    OPENSSL_RAW_DATA,
+    $iv
+);
+
+if ($decryptedEmailJson === false) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Falha na descriptografia do e-mail.']);
+    exit;
+}
+
+$emailData = json_decode($decryptedEmailJson, true);
+if (!$emailData || !isset($emailData['email'])) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Formato inválido dos dados do e-mail descriptografados.']);
+    exit;
+}
+
+$email = $emailData['email']; // O e-mail descriptografado
+
+// Agora, o restante do seu código para enviar o código...
 // Verifica se o e-mail existe no banco com prepared statement
 $sql = "SELECT * FROM usuarios WHERE email = ?";
 $stmt = mysqli_prepare($con, $sql);

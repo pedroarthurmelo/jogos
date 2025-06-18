@@ -1,0 +1,446 @@
+/* === Existing CSS (condensed for reference, assuming it's in a separate file or <style> block) === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1c1c1c;
+    color: #00ffff;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    background-image: url('../imagens/teste.jpg'); /* Confirme se este caminho está correto */
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    position: relative;
+
+    /* MODIFICAÇÃO: Ajustar padding para compensar o cabeçalho fixo */
+    /* Padding original: 20px; */
+    /* Altura estimada do cabeçalho: ~60-70px. Usaremos 70px + 20px de padding original. */
+    padding-top: 90px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    /* Isso garante que o conteúdo comece abaixo do cabeçalho e a centralização flex se aplique ao espaço restante */
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 0; /* Ficará atrás de .nav (z-index: 10) e do formulário (z-index: 1) */
+}
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 20px;
+    background-color: rgba(30, 30, 30, 0.9);
+    z-index: 10;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.nav-logo-text {
+    color: #00ffff; /* Havia #fff em uma das suas regras, garanta consistência ou escolha uma */
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-logo-text:hover {
+    color: #059bb9; /* Ou #00bfff da outra regra */
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-button {
+    background-color: transparent;
+    color: #00ffff;
+    border: 1px solid #00ffff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-button:hover {
+    background-color: #00ffff;
+    color: #000;
+}
+
+.nav-user { /* Regras combinadas para .nav-user */
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    position: relative; /* Para o posicionamento do dropdown */
+}
+
+.nav-user:hover {
+    color: #00bfff;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #111;
+    min-width: 130px; /* Ajuste conforme necessário */
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 11; /* Acima do .nav para garantir visibilidade */
+    top: 100%; /* Posiciona o dropdown abaixo do elemento .nav-user */
+    right: 0; /* Alinha à direita do .nav-user */
+    margin-top: 5px; /* Pequeno espaço entre o .nav-user e o dropdown */
+    border-radius: 4px;
+}
+
+.dropdown-content.active {
+    display: block;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 10px 15px; /* Padding um pouco menor para itens de dropdown */
+    text-decoration: none;
+    display: block;
+    font-size: 14px; /* Fonte menor para itens de dropdown */
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #333;
+}
+
+
+.container { /* Estilo geral de container da sua base CSS */
+    text-align: center;
+    background-color: rgba(30, 30, 0.8);
+    padding: 50px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    z-index: 1;
+    /* Se este container for usado em outras páginas diretamente abaixo do .nav, */
+    /* adicione margin-top para evitar que o conteúdo "pule" para baixo do header */
+    /* margin-top: 90px; */ /* Ajuste conforme a altura do header + padding desejado */
+}
+
+h1 { /* Estilo geral de H1 */
+    font-size: 2rem;
+    margin-bottom: 30px; /* Será a margem abaixo do H1 principal da página */
+    color: #00ffff;
+    text-align: center; /* Garante que o texto do H1 esteja centralizado */
+}
+
+/* Estilos gerais de input/button permanecem os mesmos */
+input {
+    font-size: 1.2rem;
+    padding: 12px;
+    margin: 12px 0;
+    border: 2px solid #00ffff;
+    border-radius: 5px;
+    width: 100%;
+    color: #333;
+    background-color: #fff;
+}
+
+input:focus {
+    outline: none;
+    border-color: #009999;
+}
+
+button {
+    background-color: #00ffff;
+    color: #000;
+    padding: 14px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #009999;
+}
+
+
+/* === CSS específico para o formulário "Adicionar Novo Jogo" === */
+
+body > h1 { /* Este H1 é o título da página, como "Adicionar Novo Jogo" */
+    position: relative; /* Garante que esteja acima do overlay body::before */
+    z-index: 1;
+    margin-bottom: 20px; /* Espaço antes do formulário */
+    /* margin-top é gerenciado pelo padding-top do body e centralização flex */
+}
+
+form#formJogo {
+    background-color: rgba(25, 25, 25, 0.85);
+    padding: 25px 30px;
+    border-radius: 10px;
+    max-width: 700px;
+    width: 90%;
+    z-index: 1;
+    /* margin-top: 10px; -- Removido ou ajustado, pois o body > h1 terá margin-bottom */
+    margin-bottom: 20px; /* Espaço na parte inferior, ajuda na centralização se o conteúdo for curto */
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+
+    /* MODIFICAÇÃO: Ajustar max-height considerando o cabeçalho e padding do body */
+    max-height: calc(100vh - 90px - 40px - 50px); /* 90px para body padding-top, 40px para body padding-bottom + form margin-bottom, 50px para o H1 da página e sua margem */
+    /* Ou uma unidade vh mais simples como 75vh ou até menos, dependendo do H1 da página */
+    /* max-height: 70vh; */
+    overflow-y: auto;
+}
+
+/* Scrollbar customizado para o formulário (navegadores Webkit) */
+form#formJogo::-webkit-scrollbar {
+    width: 8px;
+}
+
+form#formJogo::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+form#formJogo::-webkit-scrollbar-thumb {
+    background-color: #00ffff;
+    border-radius: 10px;
+    border: 2px solid #1c1c1c; /* Opcional: adiciona uma pequena borda ao redor do thumb */
+}
+
+form#formJogo::-webkit-scrollbar-thumb:hover {
+    background-color: #00cccc;
+}
+
+/* H1 dentro do formulário (se você decidir mover o título para dentro do form#formJogo) */
+/* Se o "Adicionar Novo Jogo" for parte do <form>, use este. Caso contrário, body > h1 aplica-se. */
+form#formJogo h1 {
+    font-size: 1.8rem; /* Um pouco menor se dentro da caixa do formulário */
+    margin-bottom: 25px;
+    text-align: center; /* Centraliza o título do formulário */
+}
+
+form#formJogo h3 {
+    color: #00ffff;
+    font-size: 1.4rem;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+/* Estilos compartilhados para inputs e textarea dentro do formulário */
+form#formJogo input[type="text"],
+form#formJogo input[type="number"],
+form#formJogo input[type="date"],
+form#formJogo textarea {
+    font-size: 1rem; /* Ajustado para mais campos */
+    padding: 10px;
+    margin: 8px 0; /* Margem reduzida para um empacotamento mais justo */
+    border: 1px solid #00ffff;
+    border-radius: 4px;
+    width: 100%;
+    color: #333;
+    background-color: #f0f8ff; /* AliceBlue, um fundo claro */
+    font-family: 'Inter', sans-serif;
+}
+
+form#formJogo input[type="text"]:focus,
+form#formJogo input[type="number"]:focus,
+form#formJogo input[type="date"]:focus,
+form#formJogo textarea:focus {
+    outline: none;
+    border-color: #009999;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+form#formJogo textarea {
+    min-height: 80px;
+    resize: vertical; /* Permite redimensionamento vertical */
+}
+
+/* Estilização para input de arquivo */
+form#formJogo input[type="file"] {
+    font-size: 0.9rem;
+    padding: 0; /* Remove padding para deixar ::file-selector-button definir */
+    margin: 8px 0;
+    border: 1px dashed #00ffff; /* Borda tracejada para distinção */
+    border-radius: 4px;
+    width: 100%;
+    color: #00ffff; /* Cor do texto para "Nenhum arquivo escolhido" */
+    background-color: rgba(255, 255, 255, 0.05); /* Fundo levemente transparente */
+    position: relative;
+    cursor: pointer;
+    line-height: normal; /* Garante que o texto não seja cortado */
+    height: auto; /* Garante que a altura se ajuste ao conteúdo */
+    padding-top: 8px; /* Adiciona padding para alinhar o texto interno com o botão */
+    padding-bottom: 8px;
+}
+
+form#formJogo input[type="file"]::file-selector-button {
+    background-color: #00ffff;
+    color: #000;
+    padding: 8px 15px; /* Ajustado para corresponder ao padding do input[type="file"] */
+    border: none;
+    border-radius: 4px 0 0 4px; /* Estiliza a parte do botão */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Espaço entre o botão e o texto "Nenhum arquivo escolhido" */
+    height: 100%; /* Faz o botão preencher a altura se possível */
+}
+
+form#formJogo input[type="file"]::file-selector-button:hover {
+    background-color: #009999;
+}
+
+form#formJogo hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 255, 255, 0), rgba(0, 255, 255, 0.75), rgba(0, 255, 255, 0));
+    margin: 25px 0;
+}
+
+form#formJogo button[type="submit"] {
+    font-size: 1.1rem; /* Tamanho ajustado */
+    padding: 12px 18px;
+    margin-top: 25px; /* Mais espaço antes do submit */
+}
+
+p#mensagem {
+    position: relative; /* Garante que esteja acima do overlay body::before */
+    z-index: 1;
+    margin-top: 15px;
+    color: #00ffff; /* Cor padrão, pode ser alterada por JS */
+    font-weight: bold;
+    min-height: 1.5em; /* Previne mudança de layout */
+    text-align: center;
+    width: 100%;
+    max-width: 700px; /* Para corresponder ao formulário */
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    body {
+        padding-top: 80px; /* Ajustar se a altura do cabeçalho mudar ou for responsiva */
+        padding-right: 15px;
+        padding-left: 15px;
+        padding-bottom: 15px;
+    }
+
+    h1 { /* H1 principal da página */
+        font-size: 1.8rem;
+    }
+    body > h1 {
+         margin-bottom: 15px;
+    }
+
+    form#formJogo {
+        padding: 20px 20px; /* Padding ligeiramente reduzido */
+        max-width: 95%;
+        max-height: calc(100vh - 80px - 30px - 40px); /* Ajustado com base no novo padding do body e H1 */
+    }
+
+    form#formJogo h1 { /* Se H1 estiver dentro do formulário */
+        font-size: 1.6rem;
+    }
+    form#formJogo h3 {
+        font-size: 1.2rem;
+    }
+
+    form#formJogo input[type="text"],
+    form#formJogo input[type="number"],
+    form#formJogo input[type="date"],
+    form#formJogo input[type="file"],
+    form#formJogo textarea {
+        font-size: 0.95rem;
+        padding: 9px;
+    }
+    form#formJogo input[type="file"]::file-selector-button {
+        padding: 7px 12px; /* Ajustado */
+    }
+
+    form#formJogo button[type="submit"] {
+        font-size: 1rem;
+        padding: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 70px; /* Ajustar se a altura do cabeçalho mudar ou for responsiva */
+        padding-right: 10px;
+        padding-left: 10px;
+        padding-bottom: 10px;
+    }
+
+    h1 { /* H1 principal da página */
+        font-size: 1.6rem;
+    }
+     body > h1 {
+         margin-bottom: 10px;
+    }
+
+    form#formJogo {
+        padding: 15px 10px; /* Padding mais justo */
+        width: 98%;
+        max-height: calc(100vh - 70px - 20px - 35px); /* Ajustado */
+    }
+
+    form#formJogo h1 { /* Se H1 estiver dentro do formulário */
+        font-size: 1.4rem;
+    }
+    form#formJogo h3 {
+        font-size: 1.1rem;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    form#formJogo input[type="text"],
+    form#formJogo input[type="number"],
+    form#formJogo input[type="date"],
+    form#formJogo input[type="file"],
+    form#formJogo textarea {
+        font-size: 0.9rem;
+        padding: 8px;
+        margin: 6px 0;
+    }
+    form#formJogo input[type="file"] {
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+    form#formJogo input[type="file"]::file-selector-button {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    form#formJogo button[type="submit"] {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+
+    form#formJogo hr {
+        margin: 20px 0;
+    }
+}

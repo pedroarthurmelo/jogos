@@ -1,5 +1,4 @@
 <?php
-include 'conexao.php'; //
 header("Content-Type: application/json"); //
 
 // Carregar chave privada do servidor
@@ -54,40 +53,66 @@ if ($decryptedRequestDataJson === false) {
 }
 
 $requestPayload = json_decode($decryptedRequestDataJson, true);
-if (!$requestPayload || !isset($requestPayload['jogo'])) {
+if (!$requestPayload || !isset($requestPayload['id'])) {
     http_response_code(400);
     echo json_encode(['error' => 'Formato inválido do payload da requisição.']);
     exit;
 }
 
-$idJogo = intval($requestPayload['jogo']); //
+$id = intval($requestPayload['id']); //
 
-if ($idJogo <= 0) { //
-    // Se o ID do jogo for inválido, retorne um array vazio criptografado
-    $responsePayload = json_encode([]); //
+if ($id <= 0) { //
+    $responsePayload = json_encode(['erro' => 'ID do jogo inválido.']); //
 } else {
-    $query = "SELECT u.username, c.texto
-              FROM criticas c
-              JOIN usuarios u ON u.id = c.id_usuario
-              WHERE c.id_jogo = ?
-              ORDER BY c.data_criacao DESC"; //
+    require_once 'conexao.php'; //
 
-    $stmt = mysqli_prepare($con, $query); //
-    mysqli_stmt_bind_param($stmt, "i", $idJogo); //
-    mysqli_stmt_execute($stmt); //
+    // Buscar dados do jogo
+    $stmt = $con->prepare("SELECT * FROM jogos WHERE id = ?"); //
+    $stmt->bind_param("i", $id); //
+    $stmt->execute(); //
     $result = $stmt->get_result(); //
+    $jogo = $result->fetch_assoc(); //
+    $stmt->close(); //
 
-    $comentarios = []; //
-    while ($row = mysqli_fetch_assoc($result)) { //
-        $comentarios[] = $row; //
+    if (!$jogo) { //
+        // Se o jogo não for encontrado, ainda envie uma resposta criptografada
+        $responsePayload = json_encode(["erro" => "Jogo não encontrado."]); //
+    } else {
+        // Buscar requisitos do sistema
+        $stmtReq = $con->prepare("SELECT * FROM requisitos_sistema WHERE id_jogo = ?"); //
+        $stmtReq->bind_param("i", $id); //
+        $stmtReq->execute(); //
+        $resultReq = $stmtReq->get_result(); //
+
+        $requisitos_minimos = ""; //
+        $requisitos_recomendados = ""; //
+
+        while ($req = $resultReq->fetch_assoc()) { //
+            $texto = //
+                "SO: {$req['so']}\n" . //
+                "Processador: {$req['processador']}\n" . //
+                "Memória: {$req['memoria']}\n" . //
+                "Placa de Vídeo: {$req['placa_video']}\n" . //
+                "Armazenamento: {$req['armazenamento']}"; //
+
+            if ($req['tipo'] === 'minimos') { //
+                $requisitos_minimos = $texto; //
+            } elseif ($req['tipo'] === 'recomendados') { //
+                $requisitos_recomendados = $texto; //
+            }
+        }
+        $stmtReq->close(); //
+
+        // Adiciona os requisitos ao array do jogo
+        $jogo['requisitos_minimos'] = $requisitos_minimos; //
+        $jogo['requisitos_recomendados'] = $requisitos_recomendados; //
+        $responsePayload = json_encode($jogo); //
     }
-    mysqli_stmt_close($stmt); //
-    $responsePayload = json_encode($comentarios); //
 }
 
 
-// 🔐 Criptografar a resposta (array de comentários ou vazio) com a mesma chave AES da requisição
-$encryptedComments = openssl_encrypt(
+// 🔐 Criptografar a resposta (dados do jogo ou erro) com a mesma chave AES da requisição
+$encryptedJogoData = openssl_encrypt(
     $responsePayload,
     'aes-128-cbc',
     $requestAesKey, // Usar a mesma chave AES da requisição do cliente
@@ -95,14 +120,15 @@ $encryptedComments = openssl_encrypt(
     $requestIv      // Usar o mesmo IV da requisição do cliente
 );
 
-if ($encryptedComments === false) {
+if ($encryptedJogoData === false) {
     http_response_code(500);
     echo json_encode(['error' => 'Falha ao criptografar os dados de resposta.']);
     exit;
 }
 
-// Retornar apenas os dados criptografados. O cliente já tem a AES key e IV para descriptografar.
+// Retornar apenas os dados do jogo criptografados. O cliente já tem a AES key e IV para descriptografar.
 echo json_encode([
-    'encryptedComments' => base64_encode($encryptedComments)
+    'encryptedJogoData' => base64_encode($encryptedJogoData)
 ]);
+$con->close(); //
 ?>

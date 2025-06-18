@@ -289,27 +289,45 @@ button {
 }
 
 .texto_critica {
-  width: 100%;
-  background-color: #333;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+    background-color: #2c2c2c;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
+
+.texto_critica textarea {
+    width: 100%;
+    resize: vertical;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: #fff;
+    color: #000;
+    box-sizing: border-box;
+    min-height: 120px;
+}
+
+.botao-critica {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: cyan;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+
 .texto_critica p{
   color: #f2f2f2;
   margin-bottom: 15px;
-}
-
-.botao-critica{
-  background-color: #00ffff; 
-  border: none; 
-  color: #000; 
-  font-weight: bold; 
-  padding: 10px 20px; 
-  border-radius: 8px; 
-  cursor: pointer; 
-  transition: background-color 0.3s ease;
 }
 
 .botao-critica:hover{

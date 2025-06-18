@@ -1,6 +1,8 @@
 <?php
-include 'conexao.php'; //
-header("Content-Type: application/json"); //
+session_start(); //
+require_once 'conexao.php'; // conexão com o banco
+
+header('Content-Type: application/json'); //
 
 // Carregar chave privada do servidor
 $privateKey = file_get_contents('private.pem');
@@ -37,7 +39,7 @@ if (!$requestKeyData || !isset($requestKeyData['key']) || !isset($requestKeyData
 $requestAesKey = hex2bin($requestKeyData['key']);
 $requestIv = hex2bin($requestKeyData['iv']);
 
-// 2. Descriptografar os dados da requisição (ID do jogo) com a chave AES e IV
+// 2. Descriptografar os dados da requisição (pode ser vazio, apenas para validar o handshake)
 $decodedEncryptedData = base64_decode($encryptedData);
 $decryptedRequestDataJson = openssl_decrypt(
     $decodedEncryptedData,
@@ -53,56 +55,37 @@ if ($decryptedRequestDataJson === false) {
     exit;
 }
 
-$requestPayload = json_decode($decryptedRequestDataJson, true);
-if (!$requestPayload || !isset($requestPayload['jogo'])) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Formato inválido do payload da requisição.']);
-    exit;
-}
 
-$idJogo = intval($requestPayload['jogo']); //
+// **GARANTIA**: Certifique-se de que 'imagem' está sendo selecionado aqui
+$sql = "SELECT id, nome, imagem, avaliacao FROM jogos ORDER BY data_lancamento DESC"; //
+$result = $con->query($sql); //
 
-if ($idJogo <= 0) { //
-    // Se o ID do jogo for inválido, retorne um array vazio criptografado
-    $responsePayload = json_encode([]); //
-} else {
-    $query = "SELECT u.username, c.texto
-              FROM criticas c
-              JOIN usuarios u ON u.id = c.id_usuario
-              WHERE c.id_jogo = ?
-              ORDER BY c.data_criacao DESC"; //
+$dados = []; //
 
-    $stmt = mysqli_prepare($con, $query); //
-    mysqli_stmt_bind_param($stmt, "i", $idJogo); //
-    mysqli_stmt_execute($stmt); //
-    $result = $stmt->get_result(); //
-
-    $comentarios = []; //
-    while ($row = mysqli_fetch_assoc($result)) { //
-        $comentarios[] = $row; //
+if ($result && $result->num_rows > 0) { //
+    while ($row = $result->fetch_assoc()) { //
+        $dados[] = $row; //
     }
-    mysqli_stmt_close($stmt); //
-    $responsePayload = json_encode($comentarios); //
 }
 
+$responsePayload = json_encode($dados); //
 
-// 🔐 Criptografar a resposta (array de comentários ou vazio) com a mesma chave AES da requisição
-$encryptedComments = openssl_encrypt(
+// 🔐 Criptografar a resposta (lista de jogos) com a mesma chave AES da requisição
+$encryptedJogosData = openssl_encrypt(
     $responsePayload,
     'aes-128-cbc',
-    $requestAesKey, // Usar a mesma chave AES da requisição do cliente
+    $requestAesKey, 
     OPENSSL_RAW_DATA,
-    $requestIv      // Usar o mesmo IV da requisição do cliente
+    $requestIv      
 );
 
-if ($encryptedComments === false) {
+if ($encryptedJogosData === false) {
     http_response_code(500);
-    echo json_encode(['error' => 'Falha ao criptografar os dados de resposta.']);
+    echo json_encode(['error' => 'Falha ao criptografar os dados da lista de jogos.']);
     exit;
 }
 
-// Retornar apenas os dados criptografados. O cliente já tem a AES key e IV para descriptografar.
 echo json_encode([
-    'encryptedComments' => base64_encode($encryptedComments)
+    'encryptedJogosData' => base64_encode($encryptedJogosData)
 ]);
 ?>

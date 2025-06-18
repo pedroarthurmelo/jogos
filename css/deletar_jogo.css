@@ -1,0 +1,294 @@
+/* === Global Resets and Base Styles === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1c1c1c;
+    color: #00ffff; /* Cyan text color for the theme */
+    font-family: 'Inter', sans-serif; /* Assuming Inter font is available */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-image: url('../imagens/teste.jpg'); /* Ensure this path is correct and image exists */
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    position: relative;
+    text-align: center; /* Center align text for body elements like h1 */
+}
+
+body::before {
+    content: '';
+    position: fixed; /* Use fixed to cover the viewport */
+    inset: 0; /* Shortcut for top, right, bottom, left = 0 */
+    background-color: rgba(0, 0, 0, 0.85); /* Dark overlay */
+    z-index: -1; /* Place it behind all other content */
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #00ffff;
+    position: relative; /* Ensure it's above the pseudo-element if z-index isn't -1 on body::before */
+    /* z-index: 1; if body::before has z-index 0 */
+}
+
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 20px;
+    background-color: rgba(30, 30, 30, 0.9);
+    z-index: 10;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .nav-logo-text {
+    color: #00ffff;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-logo-text:hover {
+    color: #059bb9;
+  }
+  
+  .nav-buttons {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .nav-button {
+    background-color: transparent;
+    color: #00ffff;
+    border: 1px solid #00ffff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .nav-button:hover {
+    background-color: #00ffff;
+    color: #000;
+  }
+  
+  .nav-user {
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-user:hover {
+    color: #00bfff;
+  }
+
+  .nav-logo-text {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-logo-text:hover {
+    color: #00bfff; /
+  }
+
+  .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #111;
+      min-width: 130px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      right: 0;
+  }
+
+  .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+  }
+
+  .dropdown-content a:hover {
+      background-color: #333;
+  }
+
+  /* Mostrar o dropdown quando a classe 'active' for aplicada */
+  .dropdown-content.active {
+      display: block;
+  }
+  .nav-user {
+    cursor: pointer;
+    display: block;
+    color: white;
+    text-align: right;
+}
+
+/* === Delete Container Styling === */
+.delete-container {
+    background-color: rgba(30, 30, 30, 0.8); /* Semi-transparent dark background */
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+    width: 100%;
+    max-width: 500px; /* Max width for the container */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: stretch; /* Stretch children to fill width */
+    gap: 20px; /* Space between elements in the container */
+    position: relative; /* For z-index stacking context if needed */
+    z-index: 1;
+}
+
+.delete-container label {
+    font-size: 1.1rem;
+    color: #00ffff; /* Cyan label text */
+    margin-bottom: 5px; /* Space below the label */
+    text-align: left; /* Align label text to the left */
+}
+
+.delete-container select {
+    font-size: 1.1rem;
+    padding: 12px;
+    border: 2px solid #00ffff;
+    border-radius: 5px;
+    background-color: #fff; /* White background for select */
+    color: #333; /* Dark text for select options */
+    width: 100%;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    appearance: none; /* Remove default browser appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* Custom arrow */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300FFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px 12px;
+}
+
+.delete-container select:focus {
+    outline: none;
+    border-color: #009999; /* Darker cyan on focus */
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+.delete-container select option {
+    background-color: #fff;
+    color: #333;
+    padding: 10px; /* Padding for options (might not be respected by all browsers) */
+}
+/* Style for the initial "Carregando..." or "Selecione..." option */
+.delete-container select option[value=""] {
+    color: #888;
+}
+
+
+.delete-container button {
+    background-color: #ff4d4d; /* Red color for delete action */
+    color: #fff; /* White text for better contrast on red */
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    width: 100%;
+}
+
+.delete-container button:hover {
+    background-color: #cc0000; /* Darker red on hover */
+}
+.delete-container button:active {
+    transform: scale(0.98); /* Slight press effect */
+}
+
+
+/* === Message Area Styling === */
+#mensagem {
+    margin-top: 25px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    min-height: 1.5em; /* Prevent layout shift */
+    width: 100%;
+    max-width: 500px; /* Match the container width */
+    text-align: center;
+    color: #00ffff; /* Default message color */
+    /* JavaScript can change background and text color for success/error */
+    /* e.g. #mensagem.success { background-color: #28a745; color: white; } */
+    /* e.g. #mensagem.error { background-color: #dc3545; color: white; } */
+    position: relative; /* For z-index stacking context if needed */
+    z-index: 1;
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+
+    .delete-container {
+        padding: 25px 30px;
+        max-width: 90%;
+        gap: 15px;
+    }
+
+    .delete-container label,
+    .delete-container select,
+    .delete-container button {
+        font-size: 1rem;
+    }
+    .delete-container select,
+    .delete-container button {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+    h1 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .delete-container {
+        padding: 20px;
+        max-width: 95%;
+        gap: 12px;
+    }
+
+    .delete-container label {
+        font-size: 0.95rem;
+    }
+    .delete-container select,
+    .delete-container button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+    .delete-container select {
+         background-position: right 10px center;
+         background-size: 10px 10px;
+    }
+}
